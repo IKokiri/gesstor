@@ -116,6 +116,14 @@ class Ausencia extends Controller
         echo json_encode($result);
     }
 
+
+    public function getAllAusencia()
+    {
+        $result = $this->oModel->getAllJoin();
+
+        echo json_encode($result);
+    }
+
     public function getById($object)
     {
 
