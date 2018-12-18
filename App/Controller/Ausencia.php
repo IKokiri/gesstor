@@ -172,7 +172,26 @@ class Ausencia extends Controller
 
         echo json_encode($result);
     }
+    public function getAllOrderApp()
+    {
+        $result = $this->oModel->getAllOrderApp();
 
+        $listaOrdenada = array();
+
+        foreach($result['result'] as $value){
+
+            $tipo = $value['tipo'];
+
+            unset($value['tipo']);
+
+            $listaOrdenada[$tipo][] = $value;
+
+        }
+
+        $result['result'] = $listaOrdenada;
+
+        echo json_encode($result);
+    }
     public function getLoginCliente()
     {
         $result = $this->oModel->getLoginCliente();

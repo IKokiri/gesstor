@@ -288,9 +288,9 @@ class Ausencia extends Model
         $query = $this->dbh->prepare($sql);
 
         $result = Database::executa($query);
-        die;
 
         if ($result['status'] && $result['count']) {
+
             for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
 
                 $aTempData = explode("/",$linha['ausencia_de']);
@@ -317,7 +317,7 @@ class Ausencia extends Model
                 $array[$i]['ausencia_local'] = $linha['ausencia_local'];
                 $array[$i]['ausencia_de'] = $ausencia_de;
                 $array[$i]['ausencia_hora'] = $linha['ausencia_hora'];
-                $array[$i]['retorno_de'] = $this->function->data_banco_br($linha['retorno_de']);
+                $array[$i]['retorno_de'] = $retorno_de;
                 $array[$i]['retorno_hora'] = $linha['retorno_hora'];
                 $array[$i]['status'] = $linha['status'];
             }
@@ -375,6 +375,70 @@ class Ausencia extends Model
     }
 
     public function getAllOrder()
+    {
+
+        $dataAtual = date('Y-m-d');
+
+        $sql = "SELECT 
+                    T2.tipo,
+                    T3.nome as nome_colaborador,
+                    T3.sobrenome as sobrenome_colaborador,
+                    T4.nome as nome_representante,
+                    T4.sobrenome as sobrenome_representante,
+                    T5.nome as nome_representante_2,
+                    T5.sobrenome as sobrenome_representante_2,
+                    T1.* 
+                FROM ausencia  T1
+                    INNER JOIN tipos T2
+                        on T1.id_tipo = T2.id
+                    INNER JOIN funcionarios T3
+                        on T1.id_colaborador = T3.id
+                    INNER JOIN funcionarios T4
+                        on T1.id_representante = T4.id
+                        INNER JOIN funcionarios T5
+                        on T1.id_representante_2 = T5.id
+                        #WHERE concat(T1.retorno_de,' ',T1.retorno_hora) >= concat(curdate(),' ',curtime()) and T1.status = 'A'
+                        WHERE T1.retorno_de >= curdate() and T1.status = 'A' and if(T1.retorno_de = curdate(), T1.retorno_hora <> 0, T1.retorno_de >= curdate())
+                        #WHERE T1.retorno_de >= curdate() and T1.status = 'A'
+                    order by T2.ordem asc, id_tipo asc, nome_colaborador asc, ausencia_de desc";
+
+        $query = $this->dbh->prepare($sql);
+
+        $result = Database::executa($query);
+
+        if ($result['status'] && $result['count']) {
+            for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
+                $array[$i]['id'] = $linha['id'];
+                $array[$i]['tipo'] = $linha['tipo'];
+                $array[$i]['nome_colaborador'] = $linha['nome_colaborador'];
+                $array[$i]['sobrenome_colaborador'] = $linha['sobrenome_colaborador'];
+                $array[$i]['nome_representante_2'] = $linha['nome_representante_2'];
+                $array[$i]['nome_representante'] = $linha['nome_representante'];
+                $array[$i]['sobrenome_representante_2'] = $linha['sobrenome_representante_2'];
+                $array[$i]['sobrenome_representante'] = $linha['sobrenome_representante'];
+                $array[$i]['id_tipo'] = $linha['id_tipo'];
+                $array[$i]['id_colaborador'] = $linha['id_colaborador'];
+                $array[$i]['telefone'] = $linha['telefone'];
+                $array[$i]['telefone_2'] = $linha['telefone_2'];
+                $array[$i]['id_representante'] = $linha['id_representante'];
+                $array[$i]['id_representante_2'] = $linha['id_representante_2'];
+                $array[$i]['empresa'] = $linha['empresa'];
+                $array[$i]['ausencia_local'] = $linha['ausencia_local'];
+                $array[$i]['ausencia_de'] = $this->function->data_dia_mes_escrito($this->function->data_banco_br($linha['ausencia_de']));
+                $array[$i]['ausencia_hora'] = $this->function->time_tela($linha['ausencia_hora']);
+                $array[$i]['retorno_de'] = $this->function->data_dia_mes_escrito($this->function->data_banco_br($linha['retorno_de']));
+                $array[$i]['retorno_hora'] = $this->function->time_tela($linha['retorno_hora']);
+                $array[$i]['status'] = $linha['status'];
+                $array[$i]['futuro'] = $this->function->comparar_datas_banco($dataAtual,$linha['ausencia_de']);
+            }
+
+            $result['result'] = $array;
+        }
+        return $result;
+    }
+
+
+    public function getAllOrderApp()
     {
 
         $dataAtual = date('Y-m-d');
