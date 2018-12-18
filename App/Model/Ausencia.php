@@ -272,7 +272,7 @@ class Ausencia extends Model
         return $result;
     }
 
-    public function getAllJoin()
+    public function getAllAusenciaApp()
     {
 
         $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM `" . $this->table . "`  T1
@@ -326,7 +326,7 @@ class Ausencia extends Model
         return $result;
     }
 
-    public function getAllAusenciaApp()
+    public function getAllJoin()
     {
 
         $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM `" . $this->table . "`  T1
