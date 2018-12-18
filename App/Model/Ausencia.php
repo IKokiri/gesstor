@@ -288,6 +288,7 @@ class Ausencia extends Model
         $query = $this->dbh->prepare($sql);
 
         $result = Database::executa($query);
+        die;
 
         if ($result['status'] && $result['count']) {
             for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
