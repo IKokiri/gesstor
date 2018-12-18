@@ -485,8 +485,8 @@ class Ausencia extends Model
                 $array[$i]['sobrenome_representante'] = $linha['sobrenome_representante'];
                 $array[$i]['id_tipo'] = $linha['id_tipo'];
                 $array[$i]['id_colaborador'] = $linha['id_colaborador'];
-                $array[$i]['telefone'] = $linha['telefone'];
-                $array[$i]['telefone_2'] = $linha['telefone_2'];
+                $array[$i]['telefone'] = str_replace("-","",$linha['telefone']);
+                $array[$i]['telefone_2'] = str_replace("-","",$linha['telefone_2']);
                 $array[$i]['id_representante'] = $linha['id_representante'];
                 $array[$i]['id_representante_2'] = $linha['id_representante_2'];
                 $array[$i]['empresa'] = $linha['empresa'];
