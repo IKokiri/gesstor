@@ -176,19 +176,19 @@ class Ausencia extends Controller
     {
         $result = $this->oModel->getAllOrderApp();
 
-        $listaOrdenada = array();
+        // $listaOrdenada = array();
 
-        foreach($result['result'] as $value){
+        // foreach($result['result'] as $value){
 
-            $tipo = $value['tipo'];
+        //     $tipo = $value['tipo'];
 
-            unset($value['tipo']);
+        //     unset($value['tipo']);
 
-            $listaOrdenada[$tipo][] = $value;
+        //     $listaOrdenada[$tipo][] = $value;
 
-        }
+        // }
 
-        $result['result'] = $listaOrdenada;
+        // $result['result'] = $listaOrdenada;
 
         echo json_encode($result);
     }
