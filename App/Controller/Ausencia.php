@@ -117,9 +117,10 @@ class Ausencia extends Controller
     }
 
 
-    public function getAllAusencia()
+    public function getAllAusenciaApp()
     {
-        $result = $this->oModel->getAllJoin();
+        $result = $this->oModel->getAllAusenciaApp();
+
 
         echo json_encode($result);
     }

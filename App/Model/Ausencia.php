@@ -243,7 +243,7 @@ class Ausencia extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM `" . $this->table."`";
 
         $query = $this->dbh->prepare($sql);
 
@@ -273,6 +273,60 @@ class Ausencia extends Model
     }
 
     public function getAllJoin()
+    {
+
+        $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM `" . $this->table . "`  T1
+                INNER JOIN tipos T2
+                    on T1.id_tipo = T2.id
+                INNER JOIN funcionarios T3
+                    on T1.id_colaborador = T3.id
+                INNER JOIN funcionarios T4
+                    on T1.id_representante = T4.id
+                INNER JOIN funcionarios T5
+                    on T1.id_representante_2 = T5.id WHERE T1.retorno_de >= curdate() order by T1.id desc";
+
+        $query = $this->dbh->prepare($sql);
+
+        $result = Database::executa($query);
+
+        if ($result['status'] && $result['count']) {
+            for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
+
+                $aTempData = explode("/",$linha['ausencia_de']);
+                $ausencia_de = $aTempData[2]."".$this->function->mes_nome($aTempData[1])
+                $aTempData = explode("/",$linha['retorno_de']);
+                $retorno_de = $aTempData[2]."".$this->function->mes_nome($aTempData[1])
+
+
+                $array[$i]['id'] = $linha['id'];
+                $array[$i]['tipo'] = $linha['tipo'];
+                $array[$i]['nome_colaborador'] = $linha['nome_colaborador'];
+                $array[$i]['sobrenome_colaborador'] = $linha['sobrenome_colaborador'];
+                $array[$i]['nome_representante_2'] = $linha['nome_representante_2'];
+                $array[$i]['nome_representante'] = $linha['nome_representante'];
+                $array[$i]['sobrenome_representante_2'] = $linha['sobrenome_representante_2'];
+                $array[$i]['sobrenome_representante'] = $linha['sobrenome_representante'];
+                $array[$i]['id_tipo'] = $linha['id_tipo'];
+                $array[$i]['id_colaborador'] = $linha['id_colaborador'];
+                $array[$i]['telefone'] = $linha['telefone'];
+                $array[$i]['telefone_2'] = $linha['telefone_2'];
+                $array[$i]['id_representante'] = $linha['id_representante'];
+                $array[$i]['id_representante_2'] = $linha['id_representante_2'];
+                $array[$i]['empresa'] = $linha['empresa'];
+                $array[$i]['ausencia_local'] = $linha['ausencia_local'];
+                $array[$i]['ausencia_de'] = $ausencia_de;
+                $array[$i]['ausencia_hora'] = $linha['ausencia_hora'];
+                $array[$i]['retorno_de'] = $this->function->data_banco_br($linha['retorno_de']);
+                $array[$i]['retorno_hora'] = $linha['retorno_hora'];
+                $array[$i]['status'] = $linha['status'];
+            }
+
+            $result['result'] = $array;
+        }
+        return $result;
+    }
+
+    public function getAllAusenciaApp()
     {
 
         $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM `" . $this->table . "`  T1
