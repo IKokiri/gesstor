@@ -486,7 +486,7 @@ class Ausencia extends Model
                 $array[$i]['id_tipo'] = $linha['id_tipo'];
                 $array[$i]['id_colaborador'] = $linha['id_colaborador'];
                 $array[$i]['telefone'] = $linha['telefone'];
-                $array[$i]['telefone_app'] = "+55".$linha['telefone'];
+                $array[$i]['telefone_app'] = "+55".str_replace("-","",$linha['telefone']);
                 $array[$i]['telefone_2'] = $linha['telefone_2'];
                 $array[$i]['telefone_2_app'] = "+55".$linha['telefone_2'];
                 $array[$i]['id_representante'] = $linha['id_representante'];
