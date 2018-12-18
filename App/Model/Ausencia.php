@@ -451,18 +451,21 @@ class Ausencia extends Model
                     T4.sobrenome as sobrenome_representante,
                     T5.nome as nome_representante_2,
                     T5.sobrenome as sobrenome_representante_2,
+                    usu.email,
                     T1.* 
                 FROM ausencia  T1
                     INNER JOIN tipos T2
                         on T1.id_tipo = T2.id
                     INNER JOIN funcionarios T3
                         on T1.id_colaborador = T3.id
+                    LEFT JOIN usuarios usu
+                        on T3.id_usuario_responsavel = usu.id
                     INNER JOIN funcionarios T4
                         on T1.id_representante = T4.id
-                        INNER JOIN funcionarios T5
+                    INNER JOIN funcionarios T5
                         on T1.id_representante_2 = T5.id
                         #WHERE concat(T1.retorno_de,' ',T1.retorno_hora) >= concat(curdate(),' ',curtime()) and T1.status = 'A'
-                        WHERE T1.retorno_de >= curdate() and T1.status = 'A' and if(T1.retorno_de = curdate(), T1.retorno_hora <> 0, T1.retorno_de >= curdate())
+                    WHERE T1.retorno_de >= curdate() and T1.status = 'A' and if(T1.retorno_de = curdate(), T1.retorno_hora <> 0, T1.retorno_de >= curdate())
                         #WHERE T1.retorno_de >= curdate() and T1.status = 'A'
                     order by T2.ordem asc, id_tipo asc, nome_colaborador asc, ausencia_de desc";
 
@@ -493,6 +496,7 @@ class Ausencia extends Model
                 $array[$i]['retorno_de'] = $this->function->data_dia_mes_escrito($this->function->data_banco_br($linha['retorno_de']));
                 $array[$i]['retorno_hora'] = $this->function->time_tela($linha['retorno_hora']);
                 $array[$i]['status'] = $linha['status'];
+                $array[$i]['email'] = $linha['email'];
                 $array[$i]['futuro'] = $this->function->comparar_datas_banco($dataAtual,$linha['ausencia_de']);
             }
 
