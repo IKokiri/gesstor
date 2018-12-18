@@ -467,7 +467,8 @@ class Ausencia extends Model
                         #WHERE concat(T1.retorno_de,' ',T1.retorno_hora) >= concat(curdate(),' ',curtime()) and T1.status = 'A'
                     WHERE T1.retorno_de >= curdate() and T1.status = 'A' and if(T1.retorno_de = curdate(), T1.retorno_hora <> 0, T1.retorno_de >= curdate())
                         #WHERE T1.retorno_de >= curdate() and T1.status = 'A'
-                    order by T2.ordem asc, id_tipo asc, nome_colaborador asc, ausencia_de desc";
+                        order by nome_colaborador asc, ausencia_de desc";
+                    #order by T2.ordem asc, id_tipo asc, nome_colaborador asc, ausencia_de desc";
 
         $query = $this->dbh->prepare($sql);
 
