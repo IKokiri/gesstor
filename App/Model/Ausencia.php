@@ -293,9 +293,9 @@ class Ausencia extends Model
             for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
 
                 $aTempData = explode("/",$linha['ausencia_de']);
-                $ausencia_de = $aTempData[2]."".$this->function->mes_nome($aTempData[1])
+                $ausencia_de = $aTempData[2]."".$this->function->mes_nome($aTempData[1]);
                 $aTempData = explode("/",$linha['retorno_de']);
-                $retorno_de = $aTempData[2]."".$this->function->mes_nome($aTempData[1])
+                $retorno_de = $aTempData[2]."".$this->function->mes_nome($aTempData[1]);
 
 
                 $array[$i]['id'] = $linha['id'];
