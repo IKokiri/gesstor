@@ -196,8 +196,6 @@ class Ausencia extends Controller
     {
         $result = $this->oModel->getLoginCliente();
 
-
-
         return $result;
     }
 

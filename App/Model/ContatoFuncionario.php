@@ -176,6 +176,31 @@ class ContatoFuncionario extends Model
         }
         return $result;
     }
+    public function getAllJoinApp()
+    {
+
+        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome FROM `" . $this->table . "` T1
+                inner join funcionarios T2
+                on T1.id_funcionario = T2.id order by T2.nome asc";
+
+        $query = $this->dbh->prepare($sql);
+
+        $result = Database::executa($query);
+
+        if ($result['status'] && $result['count']) {
+            for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
+                $array[$i]['id'] = $linha['id'];
+                $array[$i]['nome'] = $linha['nome'];
+                $array[$i]['observacao'] = $linha['observacao'];
+                $array[$i]['sobrenome'] = $linha['sobrenome'];
+                $array[$i]['id_funcionario'] = $linha['id_funcionario'];
+                $array[$i]['contato'] = $linha['contato'];
+            }
+
+            $result['result'] = $array;
+        }
+        return $result;
+    }
 
     public function delete()
     {

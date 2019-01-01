@@ -84,6 +84,41 @@ class ContatoFuncionario extends Controller
 
         echo json_encode($result);
     }
+    
+    public function getAllJoinApp()
+    {
+        $result = $this->oModel->getAllJoinApp();
+
+        $rTemp = $result['result'];
+        
+        $aContent = array();
+
+        foreach($rTemp as $key => $value){
+            
+            $dados = [];
+            $contatos = [];
+            $idFuncionario = $value['id_funcionario'];
+
+            $dados['id'] = $value['id'];
+            $dados['nome'] = $value['nome'];
+            $dados['sobrenome'] = $value['sobrenome'];
+            $dados['id_funcionario'] = $value['id_funcionario'];
+
+            $contatos['observacao'] = $value['observacao'];
+            $contatos['contato'] = $value['contato'];
+
+            $aContent["d".$idFuncionario]['dados'] = $dados;
+            $aContent["d".$idFuncionario]['contatos'][] = $contatos;
+
+        }
+
+        $result['result'] = $aContent;
+        // echo "<pre>";
+        // print_r($aContent);
+        // echo "</pre>";
+
+        echo json_encode($result);
+    }
 
     public function getById($object)
     {
