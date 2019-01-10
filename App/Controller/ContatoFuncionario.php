@@ -107,6 +107,7 @@ class ContatoFuncionario extends Controller
 
             $contatos['observacao'] = $value['observacao'];
             $contatos['contato'] = $value['contato'];
+            $contatos['contato_app'] = $value['contato_app'];
 
             $aContent["d".$idFuncionario]['dados'] = $dados;
             $aContent["d".$idFuncionario]['contatos'][] = $contatos;
