@@ -199,7 +199,7 @@ class ContatoFuncionario extends Model
                 $array[$i]['sobrenome'] = $linha['sobrenome'];
                 $array[$i]['id_funcionario'] = $linha['id_funcionario'];
                 $array[$i]['contato'] = $linha['contato'];
-                $array[$i]['contato_app'] = str_replace(" ","",str_replace("-","",$linha['contato']));
+                $array[$i]['contato_app'] = "+55".str_replace(" ","",str_replace("-","",$linha['contato']));
             }
 
             $result['result'] = $array;
