@@ -32,7 +32,7 @@ class Login extends Controller
         $oUsuario->populate($object);
 
         $result = $oUsuario->getLogin();
-        print_r($result);die;
+        // print_r($result);die;
         if (isset($result['result']) && $result['count']) {
 
             $result['result']['senha'] = sha1($result['result']['senha']);
