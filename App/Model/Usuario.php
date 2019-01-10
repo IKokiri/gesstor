@@ -159,7 +159,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.id as id_usuario,T1.*,T2.nome,T2.fantasia,T2.id as id_area,T3.id as id_funcionario,T3.nome as nomeFuncionario,T3.sobrenome  FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.id as id_usuario,T1.*,T2.nome,T2.fantasia,T2.id as id_area,T3.id as id_funcionario,T3.nome as nomeFuncionario,T3.sobrenome,T3.sigla  FROM `" . $this->table . "` T1 
                 left JOIN clientes T2
                 on T1.id = T2.id_usuario_responsavel
                 left JOIN funcionarios T3
@@ -183,6 +183,7 @@ class Usuario extends Model
             $array['funcionario'] = $linha['nomeFuncionario'] . ' ' . $linha['sobrenome'];
             $array['email'] = $linha['email'];
             $array['senha'] = $linha['senha'];
+            $array['sigla'] = $linha['sigla'];
             $array['imagem'] = $linha['imagem'];
             $array['id_grupo_permissao'] = $linha['id_grupo_permissao'];
             $array['status'] = $linha['status'];
