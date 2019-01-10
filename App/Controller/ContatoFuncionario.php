@@ -103,6 +103,7 @@ class ContatoFuncionario extends Controller
             $dados['nome'] = $value['nome'];
             $dados['sobrenome'] = $value['sobrenome'];
             $dados['id_funcionario'] = $value['id_funcionario'];
+            $dados['email'] = $value['email'];
 
             $contatos['observacao'] = $value['observacao'];
             $contatos['contato'] = $value['contato'];

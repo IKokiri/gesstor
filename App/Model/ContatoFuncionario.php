@@ -179,9 +179,12 @@ class ContatoFuncionario extends Model
     public function getAllJoinApp()
     {
 
-        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome,T3.email FROM `" . $this->table . "` T1
                 inner join funcionarios T2
-                on T1.id_funcionario = T2.id order by T2.nome asc";
+                on T1.id_funcionario = T2.id 
+                left join usuarios T3
+                on T2.id_usuario_responsavel = T3.id
+                order by T2.nome asc";
 
         $query = $this->dbh->prepare($sql);
 
@@ -191,10 +194,12 @@ class ContatoFuncionario extends Model
             for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
                 $array[$i]['id'] = $linha['id'];
                 $array[$i]['nome'] = $linha['nome'];
+                $array[$i]['email'] = $linha['email'];
                 $array[$i]['observacao'] = $linha['observacao'];
                 $array[$i]['sobrenome'] = $linha['sobrenome'];
                 $array[$i]['id_funcionario'] = $linha['id_funcionario'];
                 $array[$i]['contato'] = $linha['contato'];
+                $array[$i]['contato_app'] = str_replace("-","",$linha['contato']);
             }
 
             $result['result'] = $array;
