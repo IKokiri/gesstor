@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Desabilitando a exibição de erros
+ */
  error_reporting(0);
 
 header('Access-Control-Allow-Origin: *');
