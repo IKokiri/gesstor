@@ -12,6 +12,9 @@ interact_fields['id_responsavel'] = '';
 interact_fields['observacao'] = '';
 interact_fields['status'] = '';
 interact_fields['addHoras'] = '';
+interact_fields['bloquear_em_horas'] = '';
+
+
 
 function inicio() {
 

@@ -326,6 +326,17 @@ class LancarHora extends Controller
         $object['id_tabela_complemento'] = $identificador[3];
         $object['id_aplicacao'] = $identificador[4];
 
+        $oSubContrato = new SubContrato_Model();
+        $oSubContrato->populate($object);
+        
+        if($oSubContrato->verificarBloqueioHoras()){
+
+            $result['MSN'] = "Atenção";
+            $result['msnErro'] = "<h1>Bloqueado para lançamento de Horas</h1>";
+            echo json_encode($result);
+            die;
+         }
+
         $this->oModel->transection();
 
         $this->oModel->populate($object);
