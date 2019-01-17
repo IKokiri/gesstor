@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
  error_reporting(0);
+=======
+error_reporting(0);
+>>>>>>> 2fd29f87ffabde84a54b20d0c2b0630588321bed
 
 header('Access-Control-Allow-Origin: *');
 

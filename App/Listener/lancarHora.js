@@ -658,7 +658,7 @@ function grid() {
 
 
 function create(formData) {
-// alert($("#id_aplicacao").val());
+    // alert($("#id_aplicacao").val());
     formData.append('action', "LancarHora");
 
     formData.append('method', "create");
@@ -693,7 +693,7 @@ function create(formData) {
 
 
 function importarDados(formData) {
-// alert($("#id_aplicacao").val());
+    // alert($("#id_aplicacao").val());
 
     formData.append('action', "LancarHora");
 
@@ -826,6 +826,7 @@ function update(formData) {
 
             } else if (data.MSN) {
                 mensagem('Erro', data.msnErro, '', '');
+                grid();
             }
 
 

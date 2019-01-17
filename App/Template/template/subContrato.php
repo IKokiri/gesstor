@@ -113,10 +113,17 @@
                             <input type="checkbox" class="flat" id="status" checked="checked"> Ativado
                         </label>
                     </div>
+                    
                     <div class="checkbox col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
                         <label>
                             <input type="checkbox" class="flat" id="addHoras" checked="checked"> Adicionar em horas
+                        </label>
+                    </div>
+
+                    <div class="checkbox col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label>
+                            <input type="checkbox" class="flat" id="bloquear_em_horas"> Bloqueio de lançamento de horas
                         </label>
                     </div>
 

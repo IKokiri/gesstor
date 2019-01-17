@@ -45,9 +45,9 @@ class SubContrato extends Model
         }
 
         $sql = "INSERT INTO `" . $this->table . "` " .
-            "(divisao,id_contrato,id_funcionario,id_objeto,id_gerente,id_responsavel,status,observacao) 
+            "(divisao,id_contrato,id_funcionario,id_objeto,id_gerente,id_responsavel,status,observacao,bloquear_em_horas) 
                 VALUES 
-                (:divisao,:id_contrato,:id_funcionario,:id_objeto,:id_gerente,:id_responsavel,:status,:observacao)";
+                (:divisao,:id_contrato,:id_funcionario,:id_objeto,:id_gerente,:id_responsavel,:status,:observacao,:bloquear_em_horas)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -59,6 +59,7 @@ class SubContrato extends Model
         $query->bindValue(':id_gerente', $this->id_gerente, PDO::PARAM_STR);
         $query->bindValue(':id_responsavel', $this->id_responsavel, PDO::PARAM_STR);
         $query->bindValue(':status', $this->status, PDO::PARAM_STR);
+        $query->bindValue(':bloquear_em_horas', $this->bloquear_em_horas, PDO::PARAM_STR);
 
         $result = Database::executa($query);
 //CLOG
@@ -102,6 +103,7 @@ class SubContrato extends Model
                 id_objeto = :id_objeto,
                 id_gerente = :id_gerente,
                 id_responsavel = :id_responsavel,
+                bloquear_em_horas = :bloquear_em_horas,
                 status = :status 
                 WHERE id = :id";
 
@@ -115,6 +117,7 @@ class SubContrato extends Model
         $query->bindValue(':id_responsavel', $this->id_responsavel, PDO::PARAM_STR);
         $query->bindValue(':status', $this->status, PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $query->bindValue(':bloquear_em_horas', $this->bloquear_em_horas, PDO::PARAM_STR);
 
         $result = Database::executa($query);
 //CLOG
@@ -186,6 +189,28 @@ class SubContrato extends Model
         return $result;
     }
 
+
+    public function verificarBloqueioHoras(){
+        
+         $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        WHERE id = :id_tabela_complemento and bloquear_em_horas = 'A'";
+    
+        $query = $this->dbh->prepare($sql);
+    
+        $query->bindValue(':id_tabela_complemento', $this->id_tabela_complemento, PDO::PARAM_STR);
+    
+    
+        $result = Database::executa($query);
+
+        if($result['count']){
+            return true;
+        }
+            return false;
+        
+
+        
+    }
+
     public function getById()
     {
         $this->validator->set('Id', $this->id)->is_required();
@@ -218,6 +243,7 @@ class SubContrato extends Model
                 $array['id_objeto'] = $linha['id_objeto'];
                 $array['observacao'] = $linha['observacao'];
                 $array['id_gerente'] = $linha['id_gerente'];
+                $array['bloquear_em_horas'] = $linha['bloquear_em_horas'];
                 $array['id_responsavel'] = $linha['id_responsavel'];
                 $array['status'] = $linha['status'];
             }

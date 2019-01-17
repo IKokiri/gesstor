@@ -37,7 +37,6 @@ class SubContrato extends Controller
 
     public function create($object)
     {
-
         $this->oModel->transection();
 
         $this->oModel->populate($object);
@@ -75,7 +74,7 @@ class SubContrato extends Controller
 
     public function update($object)
     {
-
+        
         $this->oModel->transection();
 
         $this->oModel->populate($object);
