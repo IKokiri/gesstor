@@ -27,6 +27,7 @@
                         <th>Gerente</th>
                         <th>Responsável</th>
                         <th>Status</th>
+                        <th>Bloqueado Horas</th>
                         <th>Alterar</th>
                     </tr>
                     </thead>
@@ -42,6 +43,7 @@
                         <th>Gerente</th>
                         <th>Responsável</th>
                         <th>Status</th>
+                        <th>Bloqueado Horas</th>
                         <th>Alterar</th>
                     </tr>
                 </table>

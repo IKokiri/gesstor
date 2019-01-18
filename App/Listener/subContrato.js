@@ -189,6 +189,7 @@ function grid() {
                         '<td>' + value.gerente + '</td>' +
                         '<td>' + value.responsavel + '</td>' +
                         '<td>' + value.status + '</td>' +
+                        '<td>' + value.bloquear_em_horas + '</td>' +
                         '<td class="update" data-id="' + value.id + '"></td>' +
                         '</tr>';
                 });

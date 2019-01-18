@@ -263,6 +263,7 @@ class SubContrato extends Model
                 T1.id_objeto,
                 T1.id_gerente,
                 T1.id_responsavel,
+                T1.bloquear_em_horas,
                 T1.status,
                 T2.numero,
                 T2.divisao as divisao_contrato,
@@ -314,6 +315,7 @@ class SubContrato extends Model
                 $array[$i]['id_responsavel'] = $linha['id_responsavel'];
                 $array[$i]['status'] = $linha['status'];
                 $array[$i]['objeto'] = $linha['objeto'];
+                $array[$i]['bloquear_em_horas'] = $linha['bloquear_em_horas'];
                 $array[$i]['funcionario'] = $linha['nome'] . ' ' . $linha['sobrenome'];
                 $array[$i]['gerente'] = $linha['nome_gerente'] . ' ' . $linha['sobrenome_gerente'];
                 $array[$i]['responsavel'] = $linha['nome_responsavel'] . ' ' . $linha['sobrenome_responsavel'];
