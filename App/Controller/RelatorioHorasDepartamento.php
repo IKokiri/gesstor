@@ -72,7 +72,8 @@ class RelatorioHorasDepartamento extends Controller
             $this->resultCentroCusto =  $result['result'];
         }
         /**
-         * DE ACORDO COM A TABELA A SER PESQUISADA RETORNA TODOS OS DADOS DA PROPOSTA SUB CONTRATO OU CENTRO DE CUSTO
+         * DE ACORDO COM A TABELA A SER PESQUISADA RETORNA TODOS OS DADOS DA PROPOSTA SUB 
+         * CONTRATO OU CENTRO DE CUSTO
          */
         private function retornarComplemento($id_tabela,$id_complemento){
     
@@ -462,10 +463,10 @@ class RelatorioHorasDepartamento extends Controller
         
 
         $arrayAjustesHC = $this->ajustes($object);
-
+// print_r($object);
+        
         foreach($result as $value){
-
-    // print_r($value);
+    
             foreach($value as $value1){
 
                 $alias = $value1['dadosComplemento']['alias']."_".$value1['departamento']."_".$value1['aplicacao'];
@@ -486,7 +487,8 @@ class RelatorioHorasDepartamento extends Controller
                     $arrayHoras[$alias]['centroCusto'] = $value1['centroCusto'];
                     $arrayHoras[$alias]['id_tabela'] = $value1['id_tabela'];
                     $arrayHoras[$alias]['id_tabela_complemento'] = $value1['id_tabela_complemento'];
-                    $arrayHoras[$alias]['id_centro_custo'] = $value1['id_centro_custo'];
+                    // $arrayHoras[$alias]['id_centro_custo'] = $value1['id_centro_custo'];
+                    $arrayHoras[$alias]['id_centro_custo'] = $object['id_centro_custo'];
                     $arrayHoras[$alias]['tempo'] = $value1['tempo'];
                     $arrayHoras[$alias]['departamento'] = $value1['departamento'];
                     $arrayHoras[$alias]['totalLinha'] = 0;
@@ -523,6 +525,7 @@ class RelatorioHorasDepartamento extends Controller
 /**
  * aplicando o ajuste
  */
+
         foreach($arrayAjustesHC as $value){
             
             foreach($value as $value1){
@@ -538,6 +541,7 @@ class RelatorioHorasDepartamento extends Controller
                         // echo $value3['totalLinha']."<br>";
                         // echo $value1['ajuste']."<br>";
                         // echo $value3['totalLinha'] = $value3['totalLinha'] + $value1['ajuste'];
+
                         $value3['totalLinha'] += $value1['ajuste'];
                         $value3['tempo'] += $value1['ajusteH'];
                         
