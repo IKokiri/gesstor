@@ -4,10 +4,55 @@ interact_fields = {};
 
 interact_fields['id'] = '';
 interact_fields['id_centro_custo'] = '';
+interact_fields['id_contrato'] = '';
 
+function loadContratos() {
+    var formData = new FormData();
+
+    formData = load_fields(formData, interact_fields);
+
+    formData.append('action', "Contrato");
+
+    formData.append('method', "getAll");
+
+    $.ajax({
+        url: urlApp,
+        type: 'POST',
+        dataType: 'JSON',
+        data: formData,
+        success: function (data) {
+
+            option = '<option value="">Selecione</option>';
+
+            if (data.count) {
+
+                $.each(data.result, function (key, value) {
+
+
+                    option += '<option value="' + value.id + '" >' + value.contrato + '</option>';
+                });
+
+                $("#id_contrato").html(option);
+
+            } else if (data.MSN) {
+                mensagem('Erro', data.msnErro, '', '');
+            }
+        },
+
+        processData: false,
+        cache: false,
+        contentType: false
+    }).done(function () {
+        $(".select2_single").select2({
+            placeholder: "Selecione",
+            allowClear: true
+        });
+    });
+
+}
 
 function loadCentroCusto() {
-    
+
     var formData = new FormData();
 
     formData = load_fields(formData, interact_fields);
@@ -47,7 +92,7 @@ function loadCentroCusto() {
             placeholder: "Select a state",
             allowClear: true
         });
-        
+
     });
 
 }
@@ -108,6 +153,7 @@ function grid() {
 
             action: 'RelatorioHorasDepartamento',
             method: 'acumuloHorasTrabalhadas',
+            id_contrato: $("#id_contrato").val(),
             data_inicio: $("#data_inicio").val(),
             data_fim: $("#data_fim").val(),
             id_centro_custo: $("#id_centro_custo").val(),
@@ -116,8 +162,8 @@ function grid() {
 
         }, success: function (data) {
 
-            titulo = "<center><h2> Custo de Mão de Obra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+data.dadosAdicionais.data_inicio+" </span> à <span> "+data.dadosAdicionais.data_fim+"</h2><center>"
-            datas = "<div align='right'> <span> "+data.dadosAdicionais.data_inicio+" </span> à <span> "+data.dadosAdicionais.data_fim+" </span> "+data.dadosAdicionais.data_solicitacao+"</div>"
+            titulo = "<center><h2> Custo de Mão de Obra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + data.dadosAdicionais.data_inicio + " </span> à <span> " + data.dadosAdicionais.data_fim + "</h2><center>"
+            datas = "<div align='right'> <span> " + data.dadosAdicionais.data_inicio + " </span> à <span> " + data.dadosAdicionais.data_fim + " </span> " + data.dadosAdicionais.data_solicitacao + "</div>"
             thead = "<thead style='text-align:center'>" +
                 "<tr>" +
                 "<td class='escon' ><h4>CONTRATO / PROPOSTA</h4></td>" +
@@ -131,16 +177,16 @@ function grid() {
             tfoot = "<tr>" +
                 "<td  class='escon' >TOTAIS</td>" +
                 "<td   class='escon' style='text-align:right'>" + data.totais.tempo + "</td>" +
-                "<td  style='text-align:right'>"+data.totais.valorBr+"</td>" +
-                "<tr>";     
+                "<td  style='text-align:right'>" + data.totais.valorBr + "</td>" +
+                "<tr>";
 
             $.each(data.dados, function (key, value) {
                 color = '';
-                if(value.ajustado == "true"){
+                if (value.ajustado == "true") {
                     color = '#f99090';
                 }
                 tbody += "<tbody>" +
-                    "<tr style='background-color:"+color+"'>" +
+                    "<tr style='background-color:" + color + "'>" +
                     "<td  class='escon'>" + value.alias + "</td>" +
                     "<td  class='escon' style='text-align:right'>" + value.tempo + "</td>" +
                     "<td style='text-align:right'>" + value.totalBr + "</td>" +
@@ -158,7 +204,7 @@ function grid() {
                 "</table>";
 
 
-            $(".grid").html(titulo+''+table+''+datas);
+            $(".grid").html(titulo + '' + table + '' + datas);
 
         }
     }).done(function () {
@@ -172,11 +218,11 @@ $(document).on("click", "#gerar", function () {
     grid();
 })
 $(document).on("click", "#ocCampos", function () {
-    
+
     $(".escon").hide()
 })
 
-$(document).on("click","#totReal",function(){
+$(document).on("click", "#totReal", function () {
     $(".totReal").toggle();
 })
 
@@ -206,5 +252,16 @@ $(document).ready(function () {
     grid();
     loadCentroCusto();
     loadFuncionarios();
+    loadContratos();
+
+    $(document).on("change", "#id_tipo", function () {
+        id = $(this).val();
+
+        if (id == "2") {
+            $(".class_contrato").hide();
+        } else {
+            $(".class_contrato").show();
+        }
+    })
 
 })

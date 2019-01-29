@@ -171,6 +171,22 @@ class RelatorioHorasDepartamento extends Controller
             $object['dataFim'] =  $object['data_fim'];
         }
 
+        if($object['id_contrato']){
+
+            $oSubContrato  = new SubContrato();
+            $oSubContrato->populate($object);
+            $result = $oSubContrato->getSubContratosContrato();
+            
+            $inContrato = "";
+    
+            foreach ($result['result'] as $l){
+                $inContrato .= $l['id'].",";    
+            }
+            $inContrato = substr($inContrato,0,-1);
+            $object['inContrato'] = $inContrato;
+        }
+        
+
         $this->oModel->populate($object);
         /**
          * FAZ A BUSCA DE TODAS AS HORAS DO BANCO DE DADOS QUE SASTISFAZEM AS RESTRIÇOES

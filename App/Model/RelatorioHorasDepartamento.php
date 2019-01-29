@@ -41,6 +41,10 @@ class RelatorioHorasDepartamento extends Model
             if($this->id_tipo){
                 $and .= " AND T1.id_tabela = :id_tipo ";
             }
+
+            if($this->inContrato && $this->id_tipo == 1){
+                 $and .= " AND T1.id_tabela_complemento IN(".$this->inContrato.") ";
+            }
             
             if($this->id_centro_custo){
                 /**
@@ -115,6 +119,12 @@ class RelatorioHorasDepartamento extends Model
         if($this->id_tipo){
             $query->bindValue(':id_tipo', $this->id_tipo, PDO::PARAM_STR);
         }
+
+        if($this->inContrato){
+            // $query->bindValue(':id_tabela_complemento', $this->inContrato, PDO::PARAM_STR);
+            
+        }
+        
         
         /**
          * ATENÇÃO 4003 E 4053

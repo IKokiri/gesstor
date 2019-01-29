@@ -555,6 +555,80 @@ class SubContrato extends Model
         return $result;
     }
 
+    public function getSubContratosContrato()
+    {
+        $sql = "SELECT 
+                T1.id,
+                T1.divisao,
+                T1.id_contrato,
+                T1.id_funcionario,
+                T1.id_objeto,
+                T1.id_gerente,
+                T1.id_responsavel,
+                T1.status,
+                T2.numero,
+                T2.divisao as divisao_contrato,
+                T2.data_contrato,
+                T3.nome,
+                T3.sobrenome,
+                T3.sigla,
+                T4.objeto,
+                T5.nome as nome_gerente,
+                T5.sobrenome as sobrenome_gerente,
+                T6.nome as nome_responsavel,
+                T6.sobrenome as sobrenome_responsavel,
+                T7.sigla as sigla_contrato
+                FROM `" . $this->table . "` T1
+                inner join contratos T2
+                on T1.id_contrato = T2.id
+                left join funcionarios T3
+                on T1.id_funcionario = T3.id
+                left join objetos T4
+                on T1.id_objeto = T4.id
+                left join funcionarios T5
+                on T1.id_gerente = T5.id
+                left join funcionarios T6
+                on T1.id_responsavel = T6.id
+                left join funcionarios T7
+                on T2.id_funcionario = T7.id
+                WHERE T2.id = :id_contrato";
+
+        $query = $this->dbh->prepare($sql);
+
+        $query->bindValue(':id_contrato', $this->id_contrato, PDO::PARAM_STR);
+
+        $result = Database::executa($query);
+        if ($result['status'] && $result['count']) {
+            for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
+
+
+                $dataAno = $this->function->data_banco_br($linha['data_contrato']);
+                $data = explode('/', $dataAno);
+                $mes = $data[1];
+                $ano = substr($data[2], 2, 2);
+                $mesAno = $mes . $ano;
+
+                $array[$i]['id'] = $linha['id'];
+                $array[$i]['divisao'] = $linha['divisao'];
+                $array[$i]['id_contrato'] = $linha['id_contrato'];
+                $array[$i]['id_funcionario'] = $linha['id_funcionario'];
+                $array[$i]['id_objeto'] = $linha['id_objeto'];
+                $array[$i]['id_gerente'] = $linha['id_gerente'];
+                $array[$i]['id_responsavel'] = $linha['id_responsavel'];
+                $array[$i]['status'] = $linha['status'];
+                $array[$i]['objeto'] = $linha['objeto'];
+                $array[$i]['funcionario'] = $linha['nome'] . ' ' . $linha['sobrenome'];
+                $array[$i]['gerente'] = $linha['nome_gerente'] . ' ' . $linha['sobrenome_gerente'];
+                $array[$i]['responsavel'] = $linha['nome_responsavel'] . ' ' . $linha['sobrenome_responsavel'];
+                $array[$i]['contrato'] = $linha['numero'] . "." . $linha['divisao_contrato'] . "-" . $linha['sigla_contrato'] . "-" . $mesAno;
+                $array[$i]['sub_contrato'] = $linha['numero'] . "." . $linha['divisao'] . "-" . $linha['sigla'] . "-" . $mesAno;
+
+
+            }
+            $result['result'] = $array;
+        }
+        return $result;
+    }
 
     public function delete()
     {
