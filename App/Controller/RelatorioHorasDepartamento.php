@@ -685,10 +685,14 @@ class RelatorioHorasDepartamento extends Controller
               
                 $alias = $value1['dadosComplemento']['numero'];
                 // $alias = $value1['dadosComplemento']['alias']."_".$value1['id_funcionario']."_".$value1['data_mes']."_".$value1['data_ano']."_".$value1['departamento'];
-
+                
                 if(isset($arrayHoras[$alias])){
 
-                    $arrayHoras[$alias]['tempo'] += $value1['tempo'];
+                    if($value1['departamento'] != "MANUT"){
+
+                        $arrayHoras[$alias]['tempo'] += $value1['tempo'];
+                        
+                    };                   
 
                 }else{
 
