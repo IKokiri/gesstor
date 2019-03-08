@@ -342,6 +342,7 @@ class SubContrato extends Model
                 T1.id_responsavel,
                 T1.status,
                 T2.numero,
+                c.nome as cliente,
                 T2.divisao as divisao_contrato,
                 T2.data_contrato,
                 T3.nome,
@@ -356,6 +357,8 @@ class SubContrato extends Model
                 FROM `" . $this->table . "` T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id and if(T2.tipo = 1, T1.divisao != '00', T1.divisao >= '00')
+                LEFT JOIN clientes c
+                on T2.id_cliente = c.id
                 LEFT join funcionarios T3
                 on T1.id_funcionario = T3.id
                 LEFT join objetos T4
@@ -395,7 +398,8 @@ class SubContrato extends Model
                 $array[$i]['gerente'] = $linha['nome_gerente'] . ' ' . $linha['sobrenome_gerente'];
                 $array[$i]['responsavel'] = $linha['nome_responsavel'] . ' ' . $linha['sobrenome_responsavel'];
                 $array[$i]['contrato'] = $linha['numero'] . "." . $linha['divisao_contrato'] . "-" . $linha['sigla_contrato'] . "-" . $mesAno;
-                $array[$i]['sub_contrato'] = $linha['numero'] . "." . $linha['divisao'] . "-" . $linha['sigla'] . "-" . $mesAno;
+                $array[$i]['sub_contrato'] = $linha['numero'] . "." . $linha['divisao'] . "-" . $linha['sigla'] . "-" . $mesAno. "-" . $linha['cliente'];
+                
 
 
             }

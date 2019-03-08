@@ -240,7 +240,7 @@ function loadSubContratos() {
                 $.each(data.result, function (key, value) {
 
 
-                    option += '<option value="' + value.id + '" >' + value.sub_contrato + '</option>';
+                    option += '<option value="' + value.id + '" >' + value.sub_contrato +'</option>';
                 });
 
                 $("#id_tabela_complemento").html(option);
