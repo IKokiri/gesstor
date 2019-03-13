@@ -22,11 +22,11 @@
             <input type="text" class="form-control" name="sigla" id="sigla" placeholder="SIGLA">
         </div>
         <div class="form-group col-6">
-            <input type="number" class="form-control" name="pontos" id="pontos" placeholder="PONTOS">
+            <input type="number" class="form-control" name="pontos" value="0" id="pontos" placeholder="PONTOS">
         </div>
     </div>
   <div class="form-group">
-    <input type="text" class="form-control" name="valor" id="valor" placeholder="VALOR">
+    <input type="text" class="form-control" name="valor" id="valor" value="0,5" placeholder="VALOR">
   </div>
   <div class="form-row text-center">
         <div class="form-group col-4">
@@ -64,7 +64,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-url = "http://localhost/gesstor/pifeServer.php";
+
+// url = "http://localhost/gesstor/pifeServer.php";
+url = "http://201.49.127.157:9003/gesstor/pifeServer.php";
 
 function calcular(){
 
