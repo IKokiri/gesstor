@@ -1,10 +1,10 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 error_reporting(0);
 
 session_start();
 
-header('Access-Control-Allow-Origin: *');
+
 
 $func = $_REQUEST['func'];
 $sigla = strtoupper($_REQUEST['sigla']);
