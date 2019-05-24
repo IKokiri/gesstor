@@ -57,7 +57,7 @@ if (isset($_SESSION['gesstor']['login'])) {
                                    required=""/>
                         </div>
                         <div class="col-md-4">
-                            <h2>@kuttner.com.br</h2>
+                            <!-- <h2>@kuttner.com.br</h2> -->
                         </div>
                     </div>
                     <div>

@@ -4,14 +4,16 @@ error_reporting(0);
 
 session_start();
 
-
-
 $func = $_REQUEST['func'];
 $sigla = strtoupper($_REQUEST['sigla']);
 $pontos = $_REQUEST['pontos'];
 $valor = $_REQUEST['valor'];
 
+
+$mysqli = new mysqli("localhost", "root", "", "gesstor");
+
 if($func == "adicionar"){
+
     $_SESSION['pife'][$sigla]['pontos']++;
     echo json_encode($_SESSION['pife']); 
 }
@@ -27,6 +29,8 @@ if($func == "addPlayer"){
         
     }else{
 
+    $sql = "INSERT INTO pife_players (sigla) values ('LZ')";
+    $mysqli->query($sql);
         $_SESSION['pife'][$sigla]['pontos'] = $pontos;
         $_SESSION['pife'][$sigla]['total'] = 0;
     }
@@ -40,7 +44,6 @@ if($func == "limpar"){
     $_SESSION['pife'] = array();
     echo json_encode($_SESSION['pife']); 
 }
-
 
 if($func == "calcular"){    
 

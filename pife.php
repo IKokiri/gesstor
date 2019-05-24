@@ -18,7 +18,10 @@
     </div>
     
     <div class="form-row">
-        <div class="form-group col-6">
+    <div class="form-group col-3">
+            <input type="text" class="form-control" name="jogo" id="jogo" placeholder="JOGO Nº">
+        </div>
+        <div class="form-group col-3">
             <input type="text" class="form-control" name="sigla" id="sigla" placeholder="SIGLA">
         </div>
         <div class="form-group col-6">
@@ -65,8 +68,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
 
-// url = "http://localhost/gesstor/pifeServer.php";
-url = "http://201.49.127.157:9003/gesstor/pifeServer.php";
+url = "http://localhost/gesstor/pifeServer.php";
+// url = "http://201.49.127.157:9003/gesstor/pifeServer.php";
+// url = "http://10.0.0.252:8090/gesstor/pifeServer.php";
 
 function calcular(){
 
