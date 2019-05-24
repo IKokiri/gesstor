@@ -32,7 +32,12 @@ class Usuario extends Controller
     }
 
     public function create($object)
-    {
+    {   
+            if($object['token'] != "LKJAS)&(*ASKSD&askjdha84"){
+
+                echo json_encode(['msg'=>'TOKEN ERRO']);
+            die;
+        }
         $this->oModel->transection();
 
         $this->oModel->populate($object);

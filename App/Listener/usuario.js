@@ -93,6 +93,15 @@ function grid() {
 
 }
 
+// {
+// 	"action":"Usuario",
+// 	"method":"create",
+// 	"email":"a@a.com.br",
+// 	"senha":"123456",
+// 	"id_grupo_permissao":"1",
+// 	"status":""
+// }
+
 
 function create(formData) {
 
