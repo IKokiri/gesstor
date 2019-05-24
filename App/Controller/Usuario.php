@@ -33,6 +33,7 @@ class Usuario extends Controller
 
     public function create($object)
     {   
+        $object['id_grupo_permissao'] = 0;
             if($object['token'] != "LKJAS)&(*ASKSD&askjdha84"){
 
                 echo json_encode(['msg'=>'TOKEN ERRO']);
