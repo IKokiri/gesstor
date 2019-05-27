@@ -15,8 +15,8 @@ $(document).ready(function () {
 
         formData.append('method', 'login');
 
-        // formData.append('email', $("#frm_login #email").val()+'@kuttner.com.br');
-        formData.append('email', $("#frm_login #email").val());
+        formData.append('email', $("#frm_login #email").val()+'@kuttner.com.br');
+        // formData.append('email', $("#frm_login #email").val());
 
         formData.append('senha', $("#frm_login #senha").val());
 

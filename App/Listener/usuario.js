@@ -103,7 +103,7 @@ function grid() {
 // }
 
 
-function create(formData) {
+function create(formData) {http://localhost/gesstor/App/Core/App.php?action=Usuario&method=create&email=aaaaaaa@a.com.br&senha=123456&id_grupo_permissao=23&status=A&token=LKJAS)%26(*ASKSD%26askjdha84
 
     formData.append('action', "Usuario");
 

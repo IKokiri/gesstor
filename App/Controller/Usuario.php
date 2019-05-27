@@ -33,6 +33,7 @@ class Usuario extends Controller
 
     public function create($object)
     {   
+        // http://localhost/gesstor/App/Core/App.php?action=Usuario&method=create&email=aaaaaaa@a.com.br&senha=123456&id_grupo_permissao=23&status=A&token=LKJAS)%26(*ASKSD%26askjdha84
         $object['id_grupo_permissao'] = 0;
             if($object['token'] != "LKJAS)&(*ASKSD&askjdha84"){
 
