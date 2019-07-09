@@ -37,7 +37,7 @@ class FuncionarioCentroCustoResponsavel extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_funcionario,id_centro_custo,gerente_centro_custo,status) VALUES (:id_funcionario,:id_centro_custo,:gerente_centro_custo,:status)";
+        $sql = "INSERT INTO " . $this->table . " (id_funcionario,id_centro_custo,gerente_centro_custo,status) VALUES (:id_funcionario,:id_centro_custo,:gerente_centro_custo,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -66,7 +66,7 @@ class FuncionarioCentroCustoResponsavel extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_funcionario = :id_funcionario,
                 id_centro_custo = :id_centro_custo,
@@ -102,7 +102,7 @@ class FuncionarioCentroCustoResponsavel extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` 
+        $sql = "SELECT * FROM " . $this->table . " 
         WHERE id_funcionario = :id_funcionario_tela and id_centro_custo = :id_centro_custo_tela";
 
         $query = $this->dbh->prepare($sql);
@@ -130,7 +130,7 @@ class FuncionarioCentroCustoResponsavel extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -152,7 +152,7 @@ class FuncionarioCentroCustoResponsavel extends Model
     public function getCentroCustosFuncionario()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` " .
+        $sql = "SELECT * FROM " . $this->table . " " .
             " WHERE id_funcionario = :id_funcionario ";
 
         $query = $this->dbh->prepare($sql);
@@ -177,7 +177,7 @@ class FuncionarioCentroCustoResponsavel extends Model
     public function verificaGerenteCentroCusto()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` " .
+        $sql = "SELECT * FROM " . $this->table . " " .
             " WHERE id_funcionario = :id_funcionario and gerente_centro_custo = 'A' and id_centro_custo in (:ids_centro_custos) ";
 
         $query = $this->dbh->prepare($sql);
@@ -203,7 +203,7 @@ class FuncionarioCentroCustoResponsavel extends Model
     public function getAllJoin()
     {
 
-        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.centroCusto FROM `" . $this->table . "` T1" .
+        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.centroCusto FROM " . $this->table . " T1" .
             " inner join funcionarios T2" .
             " on T1.id_funcionario = T2.id" .
             " inner join centro_custos T3" .
@@ -232,7 +232,7 @@ class FuncionarioCentroCustoResponsavel extends Model
     public function getAllJoinId()
     {
 
-        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.centroCusto FROM `" . $this->table . "` T1" .
+        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.centroCusto FROM " . $this->table . " T1" .
             " inner join funcionarios T2" .
             " on T1.id_funcionario = T2.id" .
             " inner join centro_custos T3" .
@@ -269,7 +269,7 @@ class FuncionarioCentroCustoResponsavel extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id_funcionario = :id_funcionario_tela and id_centro_custo = :id_centro_custo_tela";
 
         $query = $this->dbh->prepare($sql);

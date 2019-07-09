@@ -36,7 +36,7 @@ class ContatoFuncionario extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_funcionario,contato,observacao,status) VALUES (:id_funcionario,:contato,:observacao,:status)";
+        $sql = "INSERT INTO " . $this->table . " (id_funcionario,contato,observacao,status) VALUES (:id_funcionario,:contato,:observacao,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -65,7 +65,7 @@ class ContatoFuncionario extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_funcionario = :id_funcionario,
                 contato = :contato,
@@ -99,7 +99,7 @@ class ContatoFuncionario extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -127,7 +127,7 @@ class ContatoFuncionario extends Model
     public function getAll()
     {
 
-        $sql = "SELECT T1.id,T1.observacao,T1.id_funcionario,T1.status,T1.contato,T2.nome,T2.sobrenome FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.id,T1.observacao,T1.id_funcionario,T1.status,T1.contato,T2.nome,T2.sobrenome FROM " . $this->table . " T1
                 inner join funcionarios T2
                 on T1.id_funcionario = T2.id order by T2.nome asc";
 
@@ -154,7 +154,7 @@ class ContatoFuncionario extends Model
     public function getAllJoin()
     {
 
-        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome FROM " . $this->table . " T1
                 inner join funcionarios T2
                 on T1.id_funcionario = T2.id order by T2.nome asc";
 
@@ -179,7 +179,7 @@ class ContatoFuncionario extends Model
     public function getAllJoinApp()
     {
 
-        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome,T3.email FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.id,T1.id_funcionario,T1.observacao,T1.contato,T2.nome,T2.sobrenome,T3.email FROM " . $this->table . " T1
                 inner join funcionarios T2
                 on T1.id_funcionario = T2.id 
                 left join usuarios T3
@@ -220,7 +220,7 @@ class ContatoFuncionario extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

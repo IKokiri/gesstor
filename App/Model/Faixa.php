@@ -41,7 +41,7 @@ class Faixa extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (faixa,status) VALUES (:faixa,:status)";
+        $sql = "INSERT INTO " . $this->table . " (faixa,status) VALUES (:faixa,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -68,7 +68,7 @@ class Faixa extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 faixa = :faixa,
                 status = :status 
@@ -98,7 +98,7 @@ class Faixa extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -124,7 +124,7 @@ class Faixa extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -155,7 +155,7 @@ class Faixa extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

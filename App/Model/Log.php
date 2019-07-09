@@ -36,7 +36,7 @@ class Log extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (tabela,campo,de,para,id_registro,data,hora,usuario_alteracao,operacao) VALUES (:tabela,:campo,:de,:para,:id_registro,curdate(),curtime(),:usuario_alteracao,:operacao)";
+        $sql = "INSERT INTO " . $this->table . " (tabela,campo,de,para,id_registro,data,hora,usuario_alteracao,operacao) VALUES (:tabela,:campo,:de,:para,:id_registro,curdate(),curtime(),:usuario_alteracao,:operacao)";
 
 
         $query = $this->dbh->prepare($sql);

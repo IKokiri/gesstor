@@ -36,7 +36,7 @@ class GrupoPermissao extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (grupo,status) VALUES (:grupo,:status)";
+        $sql = "INSERT INTO " . $this->table . " (grupo,status) VALUES (:grupo,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -63,7 +63,7 @@ class GrupoPermissao extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 grupo = :grupo,
                 status = :status 
@@ -93,7 +93,7 @@ class GrupoPermissao extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -119,7 +119,7 @@ class GrupoPermissao extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -184,7 +184,7 @@ class GrupoPermissao extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

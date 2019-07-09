@@ -38,7 +38,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (email,senha,status,id_grupo_permissao) VALUES (:email,:senha,:status,:id_grupo_permissao)";
+        $sql = "INSERT INTO " . $this->table . " (email,senha,status,id_grupo_permissao) VALUES (:email,:senha,:status,:id_grupo_permissao)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -67,7 +67,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 email = :email,
                 senha = :senha,
@@ -101,7 +101,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 imagem = :imagem
                 WHERE id = :id";
@@ -129,7 +129,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 senha = :senha
                 WHERE id = :id";
@@ -159,7 +159,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.id as id_usuario,T1.*,T2.nome,T2.fantasia,T2.id as id_area,T3.id as id_funcionario,T3.nome as nomeFuncionario,T3.sobrenome,T3.sigla  FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.id as id_usuario,T1.*,T2.nome,T2.fantasia,T2.id as id_area,T3.id as id_funcionario,T3.nome as nomeFuncionario,T3.sobrenome,T3.sigla  FROM " . $this->table . " T1 
                 left JOIN clientes T2
                 on T1.id = T2.id_usuario_responsavel
                 left JOIN funcionarios T3
@@ -208,7 +208,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.id as id_usuario,T1.*,T2.nome,T2.fantasia,T2.id as id_area,T3.id as id_funcionario,T3.nome as nomeFuncionario,T3.sobrenome  FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.id as id_usuario,T1.*,T2.nome,T2.fantasia,T2.id as id_area,T3.id as id_funcionario,T3.nome as nomeFuncionario,T3.sobrenome  FROM " . $this->table . " T1 
                 left JOIN clientes T2
                 on T1.id = T2.id_usuario_responsavel
                 left JOIN funcionarios T3
@@ -253,7 +253,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.id as id_usuario,T1.*,T2.id as id_area FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.id as id_usuario,T1.*,T2.id as id_area FROM " . $this->table . " T1
         LEFT JOIN clientes T2
                 on T1.id = T2.id_usuario_responsavel
         WHERE T1.id = :id";
@@ -284,7 +284,7 @@ class Usuario extends Model
     public function getAll()
     {
 
-        $sql = "SELECT T1.*, T2.grupo FROM `" . $this->table . "` T1 " .
+        $sql = "SELECT T1.*, T2.grupo FROM " . $this->table . " T1 " .
             " left join grupo_permissoes T2" .
             " on T1.id_grupo_permissao = T2.id";
 
@@ -320,7 +320,7 @@ class Usuario extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

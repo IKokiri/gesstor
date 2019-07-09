@@ -36,7 +36,7 @@ class Servico extends Model
 //            return $result;
 //        }
 
-        $sql = "INSERT INTO `" . $this->table . "` (servico,valor,descricao,status,icone) VALUES (:servico,:valor,:descricao,:status,:icone)";
+        $sql = "INSERT INTO " . $this->table . " (servico,valor,descricao,status,icone) VALUES (:servico,:valor,:descricao,:status,:icone)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -68,7 +68,7 @@ class Servico extends Model
 //        }
 
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 servico = :servico,
                 valor = :valor,
@@ -105,7 +105,7 @@ class Servico extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE id = :id";
+        $sql = "SELECT * FROM " . $this->table . " WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);
 
@@ -135,7 +135,7 @@ class Servico extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -159,7 +159,7 @@ class Servico extends Model
     public function getAllActive()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE status ='A'";
+        $sql = "SELECT * FROM " . $this->table . " WHERE status ='A'";
 
         $query = $this->dbh->prepare($sql);
 
@@ -192,7 +192,7 @@ class Servico extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

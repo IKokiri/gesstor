@@ -36,7 +36,7 @@ class Cobranca extends Model
 //            return $result;
 //        }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_servico_cliente,valor_servico,dia_vencimento) VALUES (:id_servico_cliente,:valor_servico,:dia_vencimento)";
+        $sql = "INSERT INTO " . $this->table . " (id_servico_cliente,valor_servico,dia_vencimento) VALUES (:id_servico_cliente,:valor_servico,:dia_vencimento)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -63,7 +63,7 @@ class Cobranca extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id_servico_cliente = :id_servico_cliente";
 
         $query = $this->dbh->prepare($sql);
@@ -97,7 +97,7 @@ class Cobranca extends Model
         }
 
         $sql = "SELECT T1.id as id_cobranca,T1.valor_servico,T1.dia_vencimento,T2.identificador,T3.nome,T3.sobrenome,T3.razao_social,T3.fantasia,T3.tipo_pessoa,
-                T3.rua,T3.numero,T3.bairro,T3.cep,T3.cidade,T3.uf,T4.email FROM `" . $this->table . "` T1
+                T3.rua,T3.numero,T3.bairro,T3.cep,T3.cidade,T3.uf,T4.email FROM " . $this->table . " T1
                 inner join servicos_areas T2
                     on T1.id_servico_cliente = T2.id
                 inner join clientes T3
@@ -142,7 +142,7 @@ class Cobranca extends Model
     public function update_link()
     {
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 link_pagamento_gerado = :link_pagamento_gerado
                 WHERE id = :id";

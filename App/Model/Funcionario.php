@@ -44,7 +44,7 @@ class Funcionario extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (tipo_pessoa,razao_social,nome,fantasia,sobrenome,rg,ie,cpf,cnpj,cep,rua,numero,bairro,cidade,uf,status,id_usuario_responsavel,sigla) VALUES (:tipo_pessoa,:razao_social,:nome,:fantasia,:sobrenome,:rg,:ie,:cpf,:cnpj,:cep,:rua,:numero,:bairro,:cidade,:uf,:status,:id_usuario_responsavel,:sigla)";
+        $sql = "INSERT INTO " . $this->table . " (tipo_pessoa,razao_social,nome,fantasia,sobrenome,rg,ie,cpf,cnpj,cep,rua,numero,bairro,cidade,uf,status,id_usuario_responsavel,sigla) VALUES (:tipo_pessoa,:razao_social,:nome,:fantasia,:sobrenome,:rg,:ie,:cpf,:cnpj,:cep,:rua,:numero,:bairro,:cidade,:uf,:status,:id_usuario_responsavel,:sigla)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -95,7 +95,7 @@ class Funcionario extends Model
         }
 
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 razao_social = :razao_social,
                 nome = :nome,
@@ -156,7 +156,7 @@ class Funcionario extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE email = :email and senha = :senha";
+        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email and senha = :senha";
 
         $query = $this->dbh->prepare($sql);
 
@@ -190,7 +190,7 @@ class Funcionario extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.*,T2.email,T2.senha FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T2.email,T2.senha FROM " . $this->table . " T1 
                 INNER JOIN usuarios T2
                 on T1.id_usuario_responsavel = T2.id
                 WHERE T1.id = :id";
@@ -238,7 +238,7 @@ class Funcionario extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -275,7 +275,7 @@ class Funcionario extends Model
     public function getEste()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` where id_usuario_responsavel =" . $_SESSION['gesstor']['login']['id'] . " limit 1";
+        $sql = "SELECT * FROM " . $this->table . " where id_usuario_responsavel =" . $_SESSION['gesstor']['login']['id'] . " limit 1";
 
         $query = $this->dbh->prepare($sql);
 
@@ -439,7 +439,7 @@ class Funcionario extends Model
     public function getAllTemp()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -486,7 +486,7 @@ class Funcionario extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

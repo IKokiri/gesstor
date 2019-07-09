@@ -26,7 +26,7 @@ class PagamentoServico extends ServicoArea
     public function getAllCliente()
     {
 
-        $sql = "SELECT T1.*,T2.servico,T2.icone,T3.valor_servico,T3.link_pagamento_gerado,T3.id as id_cobranca,T3.id_servico_cliente,T3.dia_vencimento,T3.status as status_cobranca  FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.*,T2.servico,T2.icone,T3.valor_servico,T3.link_pagamento_gerado,T3.id as id_cobranca,T3.id_servico_cliente,T3.dia_vencimento,T3.status as status_cobranca  FROM " . $this->table . " T1
                  INNER JOIN servicos T2
                     on T1.id_servico = T2.id
                 INNER JOIN cobrancas T3

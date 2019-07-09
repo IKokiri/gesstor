@@ -36,7 +36,7 @@ class CustoHoraDepartamento extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_centro_custo,data,valor,status) VALUES (:id_centro_custo,:data,:valor,:status)";
+        $sql = "INSERT INTO " . $this->table . " (id_centro_custo,data,valor,status) VALUES (:id_centro_custo,:data,:valor,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -65,7 +65,7 @@ class CustoHoraDepartamento extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_centro_custo = :id_centro_custo,
                 data = :data,
@@ -100,7 +100,7 @@ class CustoHoraDepartamento extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id_centro_custo = :id_centro_custo and T1.data = :data";
 
         $query = $this->dbh->prepare($sql);
@@ -143,7 +143,7 @@ class CustoHoraDepartamento extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id_centro_custo = :id_centro_custo and T1.data = :data";
 
         $query = $this->dbh->prepare($sql);
@@ -186,7 +186,7 @@ class CustoHoraDepartamento extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.data BETWEEN :dataInicio and :dataFim";
 
         $query = $this->dbh->prepare($sql);
@@ -220,7 +220,7 @@ class CustoHoraDepartamento extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` T1" .
+        $sql = "SELECT * FROM " . $this->table . " T1" .
             " INNER JOIN centro_custos T2 " .
             " ON T1.id_centro_custo = T2.id";
 
@@ -257,7 +257,7 @@ class CustoHoraDepartamento extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id_centro_custo = :id_centro_custo and data = :data";
 
         $query = $this->dbh->prepare($sql);

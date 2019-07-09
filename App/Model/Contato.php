@@ -36,7 +36,7 @@ class Contato extends Model
 //            return $result;
 //        }
 
-        $sql = "INSERT INTO `" . $this->table . "` (nome_contato,sobrenome_contato,email_contato,telefone_contato,id_area_contato,area) 
+        $sql = "INSERT INTO " . $this->table . " (nome_contato,sobrenome_contato,email_contato,telefone_contato,id_area_contato,area) 
                 VALUES 
                 (:nome_contato,:sobrenome_contato,:email_contato,:telefone_contato,:id_area_contato,:area)";
 
@@ -69,7 +69,7 @@ class Contato extends Model
 //            return $result;
 //        }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 nome_contato = :nome_contato,
                 sobrenome_contato = :sobrenome_contato,
@@ -110,7 +110,7 @@ class Contato extends Model
 
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE id = :id_contato";
+        $sql = "SELECT * FROM " . $this->table . " WHERE id = :id_contato";
 
         $query = $this->dbh->prepare($sql);
 
@@ -136,7 +136,7 @@ class Contato extends Model
     public function getAll()
     {
 
-        $sql = "SELECT T1.*,T2.nome,T2.fantasia FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T2.nome,T2.fantasia FROM " . $this->table . " T1 
                 LEFT JOIN clientes T2
                     on T1.id_area_contato = T2.id";
 
@@ -164,7 +164,7 @@ class Contato extends Model
     {
         $this->busca = ($this->busca) ? '%' . $this->busca . '%' : '';
 
-        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T2.fantasia FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T2.fantasia FROM " . $this->table . " T1 
                 LEFT JOIN clientes T2
                     on T1.id_area_contato = T2.id 
                 where concat(T2.nome,' ',T2.sobrenome) like :busca or T2.fantasia like :busca";
@@ -193,7 +193,7 @@ class Contato extends Model
     public function getAllArea()
     {
 
-        $sql = "SELECT T1.*,T2.nome,T2.fantasia FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T2.nome,T2.fantasia FROM " . $this->table . " T1 
                 INNER JOIN clientes T2
                     on T1.id_area_contato = T2.id
                 where id_area_contato = :id_area_contato and area = :area";
@@ -235,7 +235,7 @@ class Contato extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

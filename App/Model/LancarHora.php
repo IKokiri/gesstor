@@ -38,7 +38,7 @@ class LancarHora extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (data,id_funcionario,id_tabela,id_tabela_complemento,id_aplicacao) VALUES (:data,:id_funcionario,:id_tabela,:id_tabela_complemento,:id_aplicacao)";
+        $sql = "INSERT INTO " . $this->table . " (data,id_funcionario,id_tabela,id_tabela_complemento,id_aplicacao) VALUES (:data,:id_funcionario,:id_tabela,:id_tabela_complemento,:id_aplicacao)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -70,7 +70,7 @@ class LancarHora extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 tempo = :tempo,
                 id_motivo_ausencia = :id_motivo_ausencia
@@ -104,7 +104,7 @@ class LancarHora extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -130,7 +130,7 @@ class LancarHora extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -151,7 +151,7 @@ class LancarHora extends Model
     public function getAllData()
     {
 
-        $sql = "select T1.*,T2.nome,T2.sobrenome,T3.ausencia,T5.centroCusto,T5.departamento,T6.aplicacao,T6.alias from  `" . $this->table . "`  T1
+        $sql = "select T1.*,T2.nome,T2.sobrenome,T3.ausencia,T5.centroCusto,T5.departamento,T6.aplicacao,T6.alias from  " . $this->table . "  T1
                 inner join funcionarios T2
                 on T1.id_funcionario = T2.id
                 left join motivos_ausencia T3
@@ -200,7 +200,7 @@ class LancarHora extends Model
 //    public function verificarFinalizado()
 //    {
 //
-//        $sql = "select * from  `" . $this->table . "`
+//        $sql = "select * from  " . $this->table . "
 //                where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario AND status = 'FINALIZADO'";
 //
 //
@@ -224,7 +224,7 @@ class LancarHora extends Model
     public function verificarAprovado()
     {
 
-        $sql = "select * from  `" . $this->table . "` 
+        $sql = "select * from  " . $this->table . " 
                 where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario AND status = 'APROVADO'";
 
 
@@ -248,7 +248,7 @@ class LancarHora extends Model
     public function verificarFinalizado()
     {
 
-        $sql = "select * from  `" . $this->table . "` 
+        $sql = "select * from  " . $this->table . " 
                 where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario AND status = 'FINALIZADO'";
 
 
@@ -273,7 +273,7 @@ class LancarHora extends Model
     public function finalizar()
     {
 
-        $sql = "update  `" . $this->table . "`
+        $sql = "update  " . $this->table . "
                 set status = 'FINALIZADO'
                 where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario";
 
@@ -293,7 +293,7 @@ class LancarHora extends Model
     public function situacaoHoras()
     {
 
-        $sql = "select T1.status,T1.id_funcionario,T3.nome,T3.sobrenome from `" . $this->table . "` T1
+        $sql = "select T1.status,T1.id_funcionario,T3.nome,T3.sobrenome from " . $this->table . " T1
                     right join funcionarios_horas T2
                     on T1.id_funcionario =  T2.id_funcionario and T1.data between :dataInicio and :dataFim
                     inner join funcionarios T3 
@@ -325,7 +325,7 @@ class LancarHora extends Model
     public function aprovar()
     {
 
-        $sql = "update  `" . $this->table . "`
+        $sql = "update  " . $this->table . "
                 set status = 'APROVADO'
                 where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario";
 
@@ -345,7 +345,7 @@ class LancarHora extends Model
     public function cancelar()
     {
 
-        $sql = "update  `" . $this->table . "`
+        $sql = "update  " . $this->table . "
                 set status = ''
                 where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario";
 
@@ -365,7 +365,7 @@ class LancarHora extends Model
     public function desaprovar()
     {
 
-        $sql = "update  `" . $this->table . "`
+        $sql = "update  " . $this->table . "
                 set status = ''
                 where data BETWEEN :dataInicio AND :dataFim and id_funcionario = :id_funcionario";
 
@@ -396,7 +396,7 @@ class LancarHora extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -426,7 +426,7 @@ class LancarHora extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE data between :dataInicio and :dataFim and id_funcionario = :id_funcionario and id_tabela = :id_tabela and id_tabela_complemento = :id_tabela_complemento and id_aplicacao = :id_aplicacao";
 
         $query = $this->dbh->prepare($sql);

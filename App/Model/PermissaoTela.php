@@ -36,7 +36,7 @@ class PermissaoTela extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_grupo,id_sub_menu) VALUES " .
+        $sql = "INSERT INTO " . $this->table . " (id_grupo,id_sub_menu) VALUES " .
             "(:id_grupo,:id_sub_menu)";
 
         $query = $this->dbh->prepare($sql);
@@ -63,7 +63,7 @@ class PermissaoTela extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_grupo = :id_grupo,
                 id_sub_menu = :id_sub_menu,
@@ -93,7 +93,7 @@ class PermissaoTela extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -128,7 +128,7 @@ class PermissaoTela extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id_grupo = :id_grupo";
 
         $query = $this->dbh->prepare($sql);
@@ -154,7 +154,7 @@ class PermissaoTela extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -175,7 +175,7 @@ class PermissaoTela extends Model
     public function getAllJoin()
     {
 
-        $sql = "SELECT T1.*,T2.grupo FROM `" . $this->table . "` T1" .
+        $sql = "SELECT T1.*,T2.grupo FROM " . $this->table . " T1" .
             " inner join grupo_permissoes T2" .
             " on T1.id_grupo = T2.id group by id_grupo";
 
@@ -210,7 +210,7 @@ class PermissaoTela extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id_grupo = :id_grupo";
 
         $query = $this->dbh->prepare($sql);
@@ -235,7 +235,7 @@ class PermissaoTela extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

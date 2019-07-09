@@ -36,7 +36,7 @@ class StatusOrcamento extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (statusOrcamento,status) VALUES (:statusOrcamento,:status)";
+        $sql = "INSERT INTO " . $this->table . " (statusOrcamento,status) VALUES (:statusOrcamento,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -63,7 +63,7 @@ class StatusOrcamento extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 statusOrcamento = :statusOrcamento,
                 status = :status 
@@ -93,7 +93,7 @@ class StatusOrcamento extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -119,7 +119,7 @@ class StatusOrcamento extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -150,7 +150,7 @@ class StatusOrcamento extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

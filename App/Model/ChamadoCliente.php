@@ -26,7 +26,7 @@ class ChamadoCliente extends Model
     public function create()
     {
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_usuario,id_servico_cliente,descricao,assunto,status,data_criado,hora_criado,id_chamado) VALUES (:id_usuario,:id_servico_cliente,:descricao,:assunto,'1',curdate(),curtime(),:id_chamado)";
+        $sql = "INSERT INTO " . $this->table . " (id_usuario,id_servico_cliente,descricao,assunto,status,data_criado,hora_criado,id_chamado) VALUES (:id_usuario,:id_servico_cliente,:descricao,:assunto,'1',curdate(),curtime(),:id_chamado)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -46,7 +46,7 @@ class ChamadoCliente extends Model
     public function getAll()
     {
 
-        $sql = "SELECT T1.*,T3.servico,T4.nome,T4.fantasia as fantasia_f,T6.nome as nome_f,T6.fantasia,T5.cor,T5.status as descricao_status FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T3.servico,T4.nome,T4.fantasia as fantasia_f,T6.nome as nome_f,T6.fantasia,T5.cor,T5.status as descricao_status FROM " . $this->table . " T1 
                    left join servicos_areas T2
                     on T1.id_servico_cliente = T2.id
                   left join servicos T3
@@ -91,7 +91,7 @@ class ChamadoCliente extends Model
 
         $and = ($this->data_inicio && $this->data_fim) ? $and : "";
 
-        $sql = "SELECT T1.*,T3.servico,T4.nome,T4.fantasia as fantasia_f,T6.nome as nome_f,T6.fantasia,T5.cor,T5.status as descricao_status FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T3.servico,T4.nome,T4.fantasia as fantasia_f,T6.nome as nome_f,T6.fantasia,T5.cor,T5.status as descricao_status FROM " . $this->table . " T1 
                    left join servicos_areas T2
                     on T1.id_servico_cliente = T2.id
                   left join servicos T3
@@ -147,7 +147,7 @@ class ChamadoCliente extends Model
 //        }
 
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 status = :status
                 WHERE id = :id";
@@ -167,7 +167,7 @@ class ChamadoCliente extends Model
     public function getAllArea()
     {
 
-        $sql = "SELECT T1.*,T3.servico,T5.cor,T5.status as descricao_status,T6.new_name  FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T3.servico,T5.cor,T5.status as descricao_status,T6.new_name  FROM " . $this->table . " T1 
                  left join servicos_areas T2
                     on T1.id_servico_cliente = T2.id
                   left join servicos T3
@@ -208,7 +208,7 @@ class ChamadoCliente extends Model
     public function getHistory()
     {
 
-        $sql = "select T1.*,T3.nome,T3.fantasia,T3.sobrenome,T4.new_name from `" . $this->table . "` T1 
+        $sql = "select T1.*,T3.nome,T3.fantasia,T3.sobrenome,T4.new_name from " . $this->table . " T1 
                 left join usuarios T2
                 on T1.id_usuario = T2.id
                 left join clientes T3 

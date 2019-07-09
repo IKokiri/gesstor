@@ -44,7 +44,7 @@ class SubContrato extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` " .
+        $sql = "INSERT INTO " . $this->table . " " .
             "(divisao,id_contrato,id_funcionario,id_objeto,id_gerente,id_responsavel,status,observacao,bloquear_em_horas) 
                 VALUES 
                 (:divisao,:id_contrato,:id_funcionario,:id_objeto,:id_gerente,:id_responsavel,:status,:observacao,:bloquear_em_horas)";
@@ -95,7 +95,7 @@ class SubContrato extends Model
         $anterior = $this->getById();
         $anterior = $anterior['result'];
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 divisao = :divisao,
                 observacao = :observacao,
@@ -192,7 +192,7 @@ class SubContrato extends Model
 
     public function verificarBloqueioHoras(){
         
-         $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+         $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE id = :id_tabela_complemento and bloquear_em_horas = 'A'";
     
         $query = $this->dbh->prepare($sql);
@@ -223,7 +223,7 @@ class SubContrato extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -277,7 +277,7 @@ class SubContrato extends Model
                 T6.nome as nome_responsavel,
                 T6.sobrenome as sobrenome_responsavel,
                 T7.sigla as sigla_contrato
-                FROM `" . $this->table . "` T1
+                FROM " . $this->table . " T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id
                 LEFT join funcionarios T3
@@ -354,7 +354,7 @@ class SubContrato extends Model
                 T6.nome as nome_responsavel,
                 T6.sobrenome as sobrenome_responsavel,
                 T7.sigla as sigla_contrato
-                FROM `" . $this->table . "` T1
+                FROM " . $this->table . " T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id and if(T2.tipo = 1, T1.divisao != '00', T1.divisao >= '00')
                 LEFT JOIN clientes c
@@ -432,7 +432,7 @@ class SubContrato extends Model
                 T6.nome as nome_responsavel,
                 T6.sobrenome as sobrenome_responsavel,
                 T7.sigla as sigla_contrato
-                FROM `" . $this->table . "` T1
+                FROM " . $this->table . " T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id
                 left join funcionarios T3
@@ -507,7 +507,7 @@ class SubContrato extends Model
                 T6.nome as nome_responsavel,
                 T6.sobrenome as sobrenome_responsavel,
                 T7.sigla as sigla_contrato
-                FROM `" . $this->table . "` T1
+                FROM " . $this->table . " T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id
                 left join funcionarios T3
@@ -582,7 +582,7 @@ class SubContrato extends Model
                 T6.nome as nome_responsavel,
                 T6.sobrenome as sobrenome_responsavel,
                 T7.sigla as sigla_contrato
-                FROM `" . $this->table . "` T1
+                FROM " . $this->table . " T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id
                 left join funcionarios T3
@@ -647,7 +647,7 @@ class SubContrato extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

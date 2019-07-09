@@ -53,7 +53,7 @@ class Cliente extends Model
             die;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (numero_sapiens,nome_reduzido,tipo_pessoa,razao_social,nome,fantasia,sobrenome,rg,ie,cpf,cnpj,cep,rua,numero,bairro,cidade,uf,status,id_usuario_responsavel) " .
+        $sql = "INSERT INTO " . $this->table . " (numero_sapiens,nome_reduzido,tipo_pessoa,razao_social,nome,fantasia,sobrenome,rg,ie,cpf,cnpj,cep,rua,numero,bairro,cidade,uf,status,id_usuario_responsavel) " .
             " VALUES " .
             " (:numero_sapiens,:nome_reduzido,:tipo_pessoa,:razao_social,:nome,:fantasia,:sobrenome,:rg,:ie,:cpf,:cnpj,:cep,:rua,:numero,:bairro,:cidade,:uf,:status,:id_usuario_responsavel)";
 
@@ -99,7 +99,7 @@ class Cliente extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE cnpj = :cnpj";
+        $sql = "SELECT * FROM " . $this->table . " WHERE cnpj = :cnpj";
 
         $query = $this->dbh->prepare($sql);
 
@@ -148,7 +148,7 @@ class Cliente extends Model
         }
 
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 razao_social = :razao_social,
                 nome = :nome,
@@ -211,7 +211,7 @@ class Cliente extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE email = :email and senha = :senha";
+        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email and senha = :senha";
 
         $query = $this->dbh->prepare($sql);
 
@@ -248,7 +248,7 @@ class Cliente extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.*,T2.email,T2.senha FROM `" . $this->table . "` T1 
+        $sql = "SELECT T1.*,T2.email,T2.senha FROM " . $this->table . " T1 
                 LEFT JOIN usuarios T2
                 on T1.id_usuario_responsavel = T2.id
                 WHERE T1.id = :id";
@@ -296,7 +296,7 @@ class Cliente extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -339,7 +339,7 @@ class Cliente extends Model
     public function getAllAtivos()
     {
 
-        $sql = "SELECT * FROM `" . $this->table."` WHERE status = 'A'";
+        $sql = "SELECT * FROM " . $this->table." WHERE status = 'A'";
 
         $query = $this->dbh->prepare($sql);
 
@@ -397,7 +397,7 @@ class Cliente extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

@@ -47,7 +47,7 @@ class NumeroOrcamento extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (tipo,numero,revisao,data,id_cliente,id_cliente_final,id_objeto,id_representante,proposta_venda,id_status_orcamento,numero_pedido,status,observacao,id_funcionario) 
+        $sql = "INSERT INTO " . $this->table . " (tipo,numero,revisao,data,id_cliente,id_cliente_final,id_objeto,id_representante,proposta_venda,id_status_orcamento,numero_pedido,status,observacao,id_funcionario) 
                 VALUES 
                 (:tipo,:numero,:revisao,curdate(),:id_cliente,:id_cliente_final,:id_objeto,:id_representante,:proposta_venda,:id_status_orcamento,:numero_pedido,:status,:observacao,:id_funcionario)";
 
@@ -100,7 +100,7 @@ class NumeroOrcamento extends Model
         $anterior = $this->getById();
         $anterior = $anterior['result'];
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 revisao = :revisao,
                 data = :data,
@@ -216,7 +216,7 @@ class NumeroOrcamento extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -264,7 +264,7 @@ class NumeroOrcamento extends Model
             return $result;
         }
 
-        $sql = "Select * from `" . $this->table . "`
+        $sql = "Select * from " . $this->table . "
                 WHERE id = :id and id_funcionario = :id_funcionario";
 
 
@@ -302,7 +302,7 @@ class NumeroOrcamento extends Model
         }
 
 
-        $sql = "SELECT T1.*,T2.sigla,T2.nome,T2.sobrenome,T3.cnpj,T3.cpf,T3.razao_social,T4.razao_social as razao_final,T4.tipo_pessoa,T3.nome as nome_cliente,T3.nome as sobrenome_cliente,T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.*,T2.sigla,T2.nome,T2.sobrenome,T3.cnpj,T3.cpf,T3.razao_social,T4.razao_social as razao_final,T4.tipo_pessoa,T3.nome as nome_cliente,T3.nome as sobrenome_cliente,T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM " . $this->table . " T1
                     inner join funcionarios T2
                     on T1.id_funcionario = T2.id
                     left join clientes T3
@@ -382,7 +382,7 @@ class NumeroOrcamento extends Model
     {
 
 
-        $sql = "SELECT T1.*,T2.sigla,T2.nome,T2.sobrenome,T3.cnpj,T3.cpf,T3.razao_social,T4.razao_social as razao_final,T4.tipo_pessoa,T3.nome as nome_cliente,T3.nome as sobrenome_cliente,T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.*,T2.sigla,T2.nome,T2.sobrenome,T3.cnpj,T3.cpf,T3.razao_social,T4.razao_social as razao_final,T4.tipo_pessoa,T3.nome as nome_cliente,T3.nome as sobrenome_cliente,T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM " . $this->table . " T1
                     inner join funcionarios T2
                     on T1.id_funcionario = T2.id
                     left join clientes T3
@@ -450,7 +450,7 @@ class NumeroOrcamento extends Model
     {
 
 
-        $sql = "SELECT T1.*,T2.sigla,T2.nome,T2.sobrenome,T3.cnpj,T3.cpf,T3.razao_social,T4.razao_social as razao_final,T4.tipo_pessoa,T3.nome as nome_cliente,T3.nome as sobrenome_cliente,T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.*,T2.sigla,T2.nome,T2.sobrenome,T3.cnpj,T3.cpf,T3.razao_social,T4.razao_social as razao_final,T4.tipo_pessoa,T3.nome as nome_cliente,T3.nome as sobrenome_cliente,T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM " . $this->table . " T1
                     inner join funcionarios T2
                     on T1.id_funcionario = T2.id
                     left join clientes T3
@@ -540,7 +540,7 @@ class NumeroOrcamento extends Model
     {
 
         $sql = "SELECT T1.*,T2.sigla,T2.nome as nome_funcionario,T2.sobrenome as sobrenome_funcionario,T3.razao_social,T4.nome_reduzido,T4.razao_social as razao_final,T3.nome,
-                    T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM `" . $this->table . "` T1
+                    T4.nome as nome_final,T5.objeto,T6.representante,T7.statusOrcamento FROM " . $this->table . " T1
                     inner join funcionarios T2
                     on T1.id_funcionario = T2.id
                     left join clientes T3
@@ -610,12 +610,12 @@ class NumeroOrcamento extends Model
     {
 
         if ($this->tipo == 3) {
-            $sql = "SELECT * FROM `" . $this->table . "` " .
+            $sql = "SELECT * FROM " . $this->table . " " .
                 "WHERE tipo = :tipo and YEAR(data_gerado) = YEAR(curdate())" .
                 "order by id desc limit 1";
 
         } else {
-            $sql = "SELECT * FROM `" . $this->table . "` " .
+            $sql = "SELECT * FROM " . $this->table . " " .
                 "WHERE tipo = :tipo " .
                 "order by id desc limit 1";
         }
@@ -665,7 +665,7 @@ class NumeroOrcamento extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

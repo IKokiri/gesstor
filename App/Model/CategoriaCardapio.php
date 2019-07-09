@@ -36,7 +36,7 @@ class CategoriaCardapio extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (categoria,status) VALUES (:categoria,:status)";
+        $sql = "INSERT INTO " . $this->table . " (categoria,status) VALUES (:categoria,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -63,7 +63,7 @@ class CategoriaCardapio extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 categoria = :categoria,
                 status = :status 
@@ -93,7 +93,7 @@ class CategoriaCardapio extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -150,7 +150,7 @@ class CategoriaCardapio extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

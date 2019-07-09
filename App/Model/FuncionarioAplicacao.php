@@ -36,7 +36,7 @@ class FuncionarioAplicacao extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_funcionario,id_aplicacao,status) VALUES (:id_funcionario,:id_aplicacao,:status)";
+        $sql = "INSERT INTO " . $this->table . " (id_funcionario,id_aplicacao,status) VALUES (:id_funcionario,:id_aplicacao,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -63,7 +63,7 @@ class FuncionarioAplicacao extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_funcionario = :id_funcionario,
                 id_aplicacao = :id_aplicacao,
@@ -97,7 +97,7 @@ class FuncionarioAplicacao extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` 
+        $sql = "SELECT * FROM " . $this->table . " 
         WHERE id_funcionario = :id_funcionario_tela and id_aplicacao = :id_aplicacao_tela";
 
         $query = $this->dbh->prepare($sql);
@@ -124,7 +124,7 @@ class FuncionarioAplicacao extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -145,7 +145,7 @@ class FuncionarioAplicacao extends Model
     public function getAplicacaoFuncionario()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` " .
+        $sql = "SELECT * FROM " . $this->table . " " .
             " WHERE id_funcionario = :id_funcionario ";
 
         $query = $this->dbh->prepare($sql);
@@ -170,7 +170,7 @@ class FuncionarioAplicacao extends Model
     public function getAllJoin()
     {
 
-        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.aplicacao FROM `" . $this->table . "` T1" .
+        $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.aplicacao FROM " . $this->table . " T1" .
             " inner join funcionarios T2" .
             " on T1.id_funcionario = T2.id" .
             " inner join aplicacoes T3" .
@@ -198,7 +198,7 @@ class FuncionarioAplicacao extends Model
     public function getAllJoinFuncionario()
     {
 
-         $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.aplicacao FROM `" . $this->table . "` T1" .
+         $sql = "SELECT T1.*,T2.nome,T2.sobrenome,T3.aplicacao FROM " . $this->table . " T1" .
             " inner join funcionarios T2" .
             " on T1.id_funcionario = T2.id" .
             " inner join aplicacoes T3" .
@@ -240,7 +240,7 @@ class FuncionarioAplicacao extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id_funcionario = :id_funcionario_tela and id_aplicacao = :id_aplicacao_tela";
 
         $query = $this->dbh->prepare($sql);

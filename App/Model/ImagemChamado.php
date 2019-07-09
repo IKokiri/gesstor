@@ -27,7 +27,7 @@ class ImagemChamado extends Model
     {
         //move_uploaded_file($this->file['file']['tmp_name'], '../imagens/chamados/'.$this->file['file']['name']);
 
-        $sql = "INSERT INTO `" . $this->table . "` (name,type,tmp_name,error,size,new_name,id_chamado) VALUES (:name,:type,:tmp_name,:error,:size,:new_name,:id_chamado)";
+        $sql = "INSERT INTO " . $this->table . " (name,type,tmp_name,error,size,new_name,id_chamado) VALUES (:name,:type,:tmp_name,:error,:size,:new_name,:id_chamado)";
 
         $query = $this->dbh->prepare($sql);
 

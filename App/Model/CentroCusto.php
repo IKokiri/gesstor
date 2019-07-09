@@ -39,7 +39,7 @@ class CentroCusto extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (departamento,centroCusto,status) VALUES (:departamento,:centroCusto,:status)";
+        $sql = "INSERT INTO " . $this->table . " (departamento,centroCusto,status) VALUES (:departamento,:centroCusto,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -67,7 +67,7 @@ class CentroCusto extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 departamento = :departamento,
                 centroCusto = :centroCusto,
@@ -127,7 +127,7 @@ class CentroCusto extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -163,7 +163,7 @@ class CentroCusto extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.centroCusto = :centro_custo";
 
         $query = $this->dbh->prepare($sql);
@@ -190,7 +190,7 @@ class CentroCusto extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` order by centroCusto asc";
+        $sql = "SELECT * FROM " . $this->table . " order by centroCusto asc";
 
         $query = $this->dbh->prepare($sql);
 
@@ -222,7 +222,7 @@ class CentroCusto extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

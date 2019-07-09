@@ -36,7 +36,7 @@ class objeto extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (objeto,status,numero_sapiens,complemento,id_unidade) VALUES (:objeto,:status,:numero_sapiens,:complemento,:id_unidade)";
+        $sql = "INSERT INTO " . $this->table . " (objeto,status,numero_sapiens,complemento,id_unidade) VALUES (:objeto,:status,:numero_sapiens,:complemento,:id_unidade)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -66,7 +66,7 @@ class objeto extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 objeto = :objeto,
                 numero_sapiens = :numero_sapiens,
@@ -102,7 +102,7 @@ class objeto extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -131,7 +131,7 @@ class objeto extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -165,7 +165,7 @@ class objeto extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

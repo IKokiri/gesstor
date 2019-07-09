@@ -43,7 +43,7 @@ class Contrato extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` " .
+        $sql = "INSERT INTO " . $this->table . " " .
             "(numero,divisao,id_funcionario,id_cliente,id_objeto,data_fim,id_gerente,id_responsavel," .
             "data_inicio,data_contrato,id_proposta,tipo,status,observacao) 
                 VALUES 
@@ -88,7 +88,7 @@ class Contrato extends Model
     public function getNext()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` " .
+        $sql = "SELECT * FROM " . $this->table . " " .
             "WHERE tipo = :tipo " .
             "order by numero desc limit 1";
 
@@ -130,7 +130,7 @@ class Contrato extends Model
         $anterior = $this->getById();
         $anterior = $anterior['result'];
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 divisao = :divisao,
                 id_funcionario = :id_funcionario,
@@ -207,7 +207,7 @@ class Contrato extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -274,7 +274,7 @@ class Contrato extends Model
                 T7.nome as nome_responsavel,
                 T7.sobrenome as sobrenome_responsavel,
                 T7.sigla as sigla_responsavel
-                FROM `" . $this->table . "` T1
+                FROM " . $this->table . " T1
                 LEFT JOIN funcionarios T2
                 on T1.id_funcionario = T2.id
                 LEFT JOIN clientes T3
@@ -359,7 +359,7 @@ class Contrato extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

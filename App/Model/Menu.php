@@ -36,7 +36,7 @@ class Menu extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (menu,icone,status) VALUES (:menu,:icone,:status)";
+        $sql = "INSERT INTO " . $this->table . " (menu,icone,status) VALUES (:menu,:icone,:status)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -64,7 +64,7 @@ class Menu extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 icone = :icone,
                 menu = :menu,
@@ -96,7 +96,7 @@ class Menu extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -123,7 +123,7 @@ class Menu extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -155,7 +155,7 @@ class Menu extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

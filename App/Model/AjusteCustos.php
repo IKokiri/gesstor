@@ -36,7 +36,7 @@ class AjusteCustos extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (valor,id_tabela,id_tabela_complemento,data,status,id_centro_custo) VALUES (:valor,:id_tabela,:id_tabela_complemento,:data,:status,:id_centro_custo)";
+        $sql = "INSERT INTO " . $this->table . " (valor,id_tabela,id_tabela_complemento,data,status,id_centro_custo) VALUES (:valor,:id_tabela,:id_tabela_complemento,:data,:status,:id_centro_custo)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -71,7 +71,7 @@ class AjusteCustos extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 valor = :valor,
                 id_tabela = :id_tabela,
@@ -118,7 +118,7 @@ class AjusteCustos extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
                 WHERE T1.id_centro_custo = :id_centro_custo and T1.data = :data and T1.id_tabela = :id_tabela and T1.id_tabela_complemento = :id_tabela_complemento";
 
         $query = $this->dbh->prepare($sql);
@@ -151,7 +151,7 @@ class AjusteCustos extends Model
     public function getAll()
     {
 
-        $sql = "SELECT T1.*,T2.divisao,T4.numero as numero_c,T3.numero as numero_p,T3.revisao,T5.centroCusto,T5.id as id_centro_custo FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.*,T2.divisao,T4.numero as numero_c,T3.numero as numero_p,T3.revisao,T5.centroCusto,T5.id as id_centro_custo FROM " . $this->table . " T1
                    left join sub_contratos T2
                    on T1.id_tabela_complemento = T2.id
                    left join contratos T4
@@ -232,7 +232,7 @@ class AjusteCustos extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id_centro_custo = :id_centro_custo and data = :data and id_tabela = :id_tabela and id_tabela_complemento = :id_tabela_complemento";
 
         $query = $this->dbh->prepare($sql);

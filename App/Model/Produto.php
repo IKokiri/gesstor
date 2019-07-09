@@ -36,7 +36,7 @@ class Produto extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (produto,codigo,id_unidade,status) VALUES 
+        $sql = "INSERT INTO " . $this->table . " (produto,codigo,id_unidade,status) VALUES 
         (:produto,:codigo,:id_unidade,:status)";
 
         $query = $this->dbh->prepare($sql);
@@ -66,7 +66,7 @@ class Produto extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 produto = :produto,
                 codigo = :codigo,
@@ -100,7 +100,7 @@ class Produto extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -128,7 +128,7 @@ class Produto extends Model
     public function getAll()
     {
 
-        $sql = "SELECT T1.*,T2.unidade FROM `" . $this->table ."` T1
+        $sql = "SELECT T1.*,T2.unidade FROM " . $this->table ." T1
         INNER JOIN unidades_medida T2
          on T1.id_unidade = T2.id";
 
@@ -164,7 +164,7 @@ class Produto extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

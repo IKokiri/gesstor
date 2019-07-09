@@ -36,7 +36,7 @@ class SubMenu extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "` (id_menu,subMenu,nomeArquivo,status) VALUES " .
+        $sql = "INSERT INTO " . $this->table . " (id_menu,subMenu,nomeArquivo,status) VALUES " .
             "(:id_menu,:subMenu,:nomeArquivo,:status)";
 
         $query = $this->dbh->prepare($sql);
@@ -66,7 +66,7 @@ class SubMenu extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_menu = :id_menu,
                 subMenu = :subMenu,
@@ -100,7 +100,7 @@ class SubMenu extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -128,7 +128,7 @@ class SubMenu extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -152,7 +152,7 @@ class SubMenu extends Model
     public function getAllJoin()
     {
 
-        $sql = "SELECT T1.*,T2.menu FROM `" . $this->table . "` T1 " .
+        $sql = "SELECT T1.*,T2.menu FROM " . $this->table . " T1 " .
             " left join menus T2 " .
             " on T1.id_menu = T2.id order by T2.menu asc";
 
@@ -188,7 +188,7 @@ class SubMenu extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

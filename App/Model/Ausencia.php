@@ -39,7 +39,7 @@ class Ausencia extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO `" . $this->table . "`(id_tipo,id_colaborador,telefone,telefone_2,id_representante,empresa,ausencia_local,ausencia_de,ausencia_hora,retorno_de,retorno_hora,status,id_representante_2) VALUES 
+        $sql = "INSERT INTO " . $this->table . "(id_tipo,id_colaborador,telefone,telefone_2,id_representante,empresa,ausencia_local,ausencia_de,ausencia_hora,retorno_de,retorno_hora,status,id_representante_2) VALUES 
                                                   (:id_tipo,:id_colaborador,:telefone,:telefone_2,:id_representante,:empresa,:ausencia_local,:ausencia_de,:ausencia_hora,:retorno_de,:retorno_hora,:status,:id_representante_2)";
 
         $query = $this->dbh->prepare($sql);
@@ -78,7 +78,7 @@ class Ausencia extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_tipo = :id_tipo,
                 id_colaborador = :id_colaborador,
@@ -131,7 +131,7 @@ class Ausencia extends Model
             return $result;
         }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET
                 status = :status 
                 WHERE id = :id";
@@ -160,7 +160,7 @@ class Ausencia extends Model
             return $result;
         }
 
-        $sql = "SELECT T1.* FROM `" . $this->table . "` T1
+        $sql = "SELECT T1.* FROM " . $this->table . " T1
         WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -206,7 +206,7 @@ class Ausencia extends Model
             return $result;
         }
 
-        $sql = "SELECT * FROM  `" . $this->table . "` T1
+        $sql = "SELECT * FROM  " . $this->table . " T1
                 where id_colaborador = :id_colaborador order by id desc limit 1;";
 
         $query = $this->dbh->prepare($sql);
@@ -243,7 +243,7 @@ class Ausencia extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table."`";
+        $sql = "SELECT * FROM " . $this->table."";
 
         $query = $this->dbh->prepare($sql);
 
@@ -275,7 +275,7 @@ class Ausencia extends Model
     public function getAllAusenciaApp()
     {
 
-        $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM `" . $this->table . "`  T1
+        $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM " . $this->table . "  T1
                 INNER JOIN tipos T2
                     on T1.id_tipo = T2.id
                 INNER JOIN funcionarios T3
@@ -330,7 +330,7 @@ class Ausencia extends Model
     public function getAllJoin()
     {
 
-        $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM `" . $this->table . "`  T1
+        $sql = "SELECT T2.tipo,T3.nome as nome_colaborador,T3.sobrenome as sobrenome_colaborador,T4.nome as nome_representante,T4.sobrenome as sobrenome_representante,T5.nome as nome_representante_2,T5.sobrenome as sobrenome_representante_2,T1.* FROM " . $this->table . "  T1
                 INNER JOIN tipos T2
                     on T1.id_tipo = T2.id
                 INNER JOIN funcionarios T3
@@ -522,7 +522,7 @@ class Ausencia extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);

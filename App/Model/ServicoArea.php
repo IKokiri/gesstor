@@ -35,7 +35,7 @@ class ServicoArea extends Model
 //            $result['validar'] = $erros;
 //            return $result;
 //        }
-        $sql = "INSERT INTO `" . $this->table . "` (id_servico,id_area,identificador,tipo_taxa,dia_vencimento,numero_meses,area) VALUES (:id_servico,:id_area,:identificador,:tipo_taxa,:dia_vencimento,:numero_meses,:area)";
+        $sql = "INSERT INTO " . $this->table . " (id_servico,id_area,identificador,tipo_taxa,dia_vencimento,numero_meses,area) VALUES (:id_servico,:id_area,:identificador,:tipo_taxa,:dia_vencimento,:numero_meses,:area)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -67,7 +67,7 @@ class ServicoArea extends Model
 //            return $result;
 //        }
 
-        $sql = "UPDATE `" . $this->table . "` 
+        $sql = "UPDATE " . $this->table . " 
                 SET 
                 id_servico = :id_servico,
                 id_area = :id_area,
@@ -111,7 +111,7 @@ class ServicoArea extends Model
 
         }
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE id = :id";
+        $sql = "SELECT * FROM " . $this->table . " WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
@@ -139,7 +139,7 @@ class ServicoArea extends Model
     public function getAll()
     {
 
-        $sql = "SELECT * FROM `" . $this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->dbh->prepare($sql);
 
@@ -171,7 +171,7 @@ class ServicoArea extends Model
     public function getServicoArea()
     {
 
-             $sql = "SELECT T1.*,T2.servico,T2.icone FROM `".$this->table."` T1
+             $sql = "SELECT T1.*,T2.servico,T2.icone FROM ".$this->table." T1
                 inner JOIN servicos T2
                 ON T1.id_servico = T2.id
                 where T1.area = :area and T1.id_area = :id_area";
@@ -206,7 +206,7 @@ class ServicoArea extends Model
     {
         $table_area = 'funcionarios';
 
-            $sql = "SELECT T1.*,T2.servico,T2.icone FROM `".$this->table."` T1
+            $sql = "SELECT T1.*,T2.servico,T2.icone FROM ".$this->table." T1
                 inner JOIN servicos T2
                 ON T1.id_servico = T2.id
                 inner join ".$table_area." T3
@@ -245,7 +245,7 @@ class ServicoArea extends Model
     public function getAllActive()
     {
 
-        $sql = "SELECT * FROM `" . $this->table . "` WHERE status ='A'";
+        $sql = "SELECT * FROM " . $this->table . " WHERE status ='A'";
 
         $query = $this->dbh->prepare($sql);
 
@@ -278,7 +278,7 @@ class ServicoArea extends Model
             return $result;
         }
 
-        $sql = "DELETE FROM `" . $this->table . "` 
+        $sql = "DELETE FROM " . $this->table . " 
                 WHERE id = :id";
 
         $query = $this->dbh->prepare($sql);
