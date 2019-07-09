@@ -208,7 +208,7 @@ class LancarHora extends Controller
             $oSubContrato = new SubContrato_Model();
             $oSubContrato->populate($object);
             $result = $oSubContrato->getJoinId();
-            $nome = $result['result']['sub_contrato'];
+            $nome = $result['result']['sub_contrato']."1 - ".$result['result']['nome_cliente'];
 
         } else if ($tabela == 2) {
 
@@ -236,6 +236,8 @@ class LancarHora extends Controller
         $this->oModel->populate($object);
 
         $result = $this->oModel->getAllData();
+        
+        
         $resultAlterado = [];
         $totais = [];
         $totaisMes = [];
@@ -247,7 +249,7 @@ class LancarHora extends Controller
                 $result['dadosFunc']['centroCusto'] = $linha['centroCusto'] . ' ' . $linha['departamento'];
 
                 $totalGeral += $linha['tempo'];
-
+                
                 $linha['nomeCusto'] = ($this->dadosTipoCusto($linha['id_tabela'], $linha['id_tabela_complemento'])) ? $this->dadosTipoCusto($linha['id_tabela'], $linha['id_tabela_complemento']) . " " . $linha['alias'] : "FOLGA";
 
                 if (isset($totais[$linha['data']])) {
@@ -273,7 +275,7 @@ class LancarHora extends Controller
 
 
         $result['totais']['totalGeral'] = $totalGeral;
-
+        
         echo json_encode($result);
     }
 

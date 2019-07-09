@@ -431,7 +431,8 @@ class SubContrato extends Model
                 T5.sobrenome as sobrenome_gerente,
                 T6.nome as nome_responsavel,
                 T6.sobrenome as sobrenome_responsavel,
-                T7.sigla as sigla_contrato
+                T7.sigla as sigla_contrato,
+                T8.nome as nome_cliente
                 FROM " . $this->table . " T1
                 inner join contratos T2
                 on T1.id_contrato = T2.id
@@ -445,6 +446,8 @@ class SubContrato extends Model
                 on T1.id_responsavel = T6.id
                 left join funcionarios T7
                 on T2.id_funcionario = T7.id
+                left join clientes T8
+                on T2.id_cliente = T8.id
                WHERE T1.id = :id";
 
         $query = $this->dbh->prepare($sql);
@@ -470,6 +473,7 @@ class SubContrato extends Model
                 $array['id_gerente'] = $linha['id_gerente'];
                 $array['id_responsavel'] = $linha['id_responsavel'];
                 $array['status'] = $linha['status'];
+                $array['nome_cliente'] = $linha['nome_cliente'];
                 $array['objeto'] = $linha['objeto'];
                 $array['funcionario'] = $linha['nome'] . ' ' . $linha['sobrenome'];
                 $array['gerente'] = $linha['nome_gerente'] . ' ' . $linha['sobrenome_gerente'];
