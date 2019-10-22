@@ -885,7 +885,7 @@ function temp(){
 }
     public function getAll($object)
     {
-
+        
         $this->oModel->populate($object);
 
         $subContrato = $this->oModel->getAllSubContrato();
@@ -942,6 +942,105 @@ function temp(){
                 $arrayDataResult['data_fim'] = $array['data_fim'];
             }
         }
+
+        sort($arrayCentroCustos);
+        $arrayCustosTela = $arrayCentroCustos;
+        $arrayTotalCentroCustos = array_flip($arrayCentroCustos);
+        $arrayCentroCustos = array_flip($arrayCentroCustos);
+
+        foreach ($arrayCentroCustos as $key => $custo) {
+            $arrayCentroCustosKey[$key] = 0;
+        }
+        foreach ($arrayTotalCentroCustos as $key => $custo) {
+            $arrayTotalCentroCustos[$key] = 0;
+        }
+
+        foreach ($dados as $dado) {
+
+
+            if (isset($arrayDados[$dado['numero']][$dado['departamento']]['tempo'])) {
+                $arrayDados[$dado['numero']][$dado['departamento']]['tempo'] += $dado['tempo'];
+                $arrayDados[$dado['numero']][$dado['departamento']]['numero'] = $dado['numero'];
+            } else {
+                $arrayDados[$dado['numero']][$dado['departamento']]['tempo'] = $dado['tempo'];
+                $arrayDados[$dado['numero']][$dado['departamento']]['numero'] = $dado['numero'];
+            }
+
+            if (isset($arrayTotalCentroCustos[$dado['departamento']])) {
+
+
+                $arrayTotalCentroCustos[$dado['departamento']] += $dado['tempo'];
+
+
+            } else {
+                $arrayTotalCentroCustos[$dado['departamento']] = $dado['tempo'];
+
+
+            }
+
+        }
+
+
+        foreach ($arrayDados as $key => $value) {
+
+            foreach ($value as $key1 => $v) {
+
+                if (!isset($dadosTela[$key])) {
+
+                    $dadosTela[$key] = $arrayCentroCustosKey;
+
+                }
+
+                $dadosTela[$key][$key1] = $v['tempo'];
+            }
+
+        }
+
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataGerado = date('d/m/Y - h:i:s');
+        $arrayDataResult['gerado'] = $dataGerado;
+        $result['datas'] = $arrayDataResult;
+        $result['centroCustos'] = $arrayCustosTela;
+        $result['centroCustosTotais'] = $arrayTotalCentroCustos;
+        $result['result'] = $dadosTela;
+        $result['count'] = 1;
+        echo json_encode($result);
+    }
+
+    public function getAllContratos($object)
+    {
+        
+        $this->oModel->populate($object);
+
+        $subContrato = $this->oModel->getAllBySubContrato();
+
+        $result['result'][0] = $subContrato['result'];
+
+        $arrayDataResult = array();
+        $arrayDados = array();
+        $dadosTela = array();
+        $arrayCentroCustos = array();
+        $arrayTotalCentroCustos = array();
+        $arrayCustosTela = array();
+        $arrayCentroCustosKey = array();
+        $dados = array();
+
+        /**
+         * JUNTA DIVISOES PROPOSTAS E CETRO CUSTOS EM UM UNICO ARRAY
+         */
+        if ($subContrato['count']) {
+            foreach ($subContrato['result'] as $array) {
+                $dados[] = $array;
+                if (!in_array($array['departamento'], $arrayCentroCustos)) {
+                    $arrayCentroCustos[] = $array['departamento'];
+                }
+                $arrayDataResult['data_inicio'] = $array['data_inicio'];
+                $arrayDataResult['data_fim'] = $array['data_fim'];
+            }
+
+        }
+
+       
 
         sort($arrayCentroCustos);
         $arrayCustosTela = $arrayCentroCustos;

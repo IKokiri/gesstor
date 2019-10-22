@@ -308,6 +308,74 @@ class RelatorioHorasDepartamento extends Model
         }
         return $result;
     }
+    public function getAllBySubContrato()
+    {
+
+        $where = $this->buscarWhereData(1);
+
+        $t = '';
+
+        $centroCusto = '';
+
+        if ($this->id_centro_custo) {
+            $centroCusto = " and T3.id = " . $this->id_centro_custo . " ";
+        }
+
+        $where .= $centroCusto;
+
+        $sql = "select T9.valor as valor4003, T1.data,T1.tempo,T1.id_tabela,T1.id_tabela_complemento,T1.id_aplicacao,T3.centroCusto,T3.departamento,T4.divisao,T5.numero,T5.data_contrato,T6.sigla,T7.aplicacao,T7.alias,T8.valor from horas T1 
+                inner join funcionarios_centro_custos T2
+                on T1.id_funcionario = T2.id_funcionario
+                inner join centro_custos T3
+                on T2.id_centro_custo = T3.id
+                inner join sub_contratos T4
+                on T1.id_tabela_complemento = T4.id
+                inner join contratos T5
+                on T4.id_contrato = T5.id
+                inner join funcionarios T6
+                on T4.id_funcionario = T6.id
+                inner join aplicacoes T7
+                on T1.id_aplicacao = T7.id  
+                left join ajustes_custos T9
+                on T4.id = T9.id_tabela_complemento and T9.id_centro_custo = '36' and T9.data = '" . $this->data_i . "'
+                left join ajustes_custos T8 
+                on T4.id = T8.id_tabela_complemento and T8.id_centro_custo = '" . $this->id_centro_custo . "' and T8.data = '" . $this->data_i . "'
+                 " . $where . " and T5.id = ".$this->id_contrato."  order by T5.numero asc, T4.divisao asc";
+
+
+        $query = $this->dbh->prepare($sql);
+
+        $result = Database::executa($query);
+
+        if ($result['status'] && $result['count']) {
+            for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
+
+                $dataAno = $this->function->data_banco_br($linha['data_contrato']);
+                $data = explode('/', $dataAno);
+                $mes = $data[1];
+                $ano = substr($data[2], 2, 2);
+                $mesAno = $mes . $ano;
+
+                $array[$i]['numero'] = $linha['numero'] . "." . $linha['divisao'] . "-" . $linha['sigla'] . "-" . $mesAno . " " . $linha['alias'];
+                $array[$i]['data'] = $linha['data'];
+                $array[$i]['valor'] = $linha['valor'];
+                $array[$i]['valor4003'] = $linha['valor4003'];
+                $array[$i]['id_aplicacao'] = $linha['id_aplicacao'];
+                $array[$i]['tempo'] = $linha['tempo'];
+                $array[$i]['id_tabela'] = $linha['id_tabela'];
+                $array[$i]['alias'] = $linha['alias'];
+                $array[$i]['id_tabela_complemento'] = $linha['id_tabela_complemento'];
+                $array[$i]['centroCusto'] = $linha['centroCusto'];
+                $array[$i]['departamento'] = $linha['centroCusto'] . '<br>' . $linha['departamento'];
+                $array[$i]['data_inicio'] = $this->function->data_banco_br($this->data_i);
+                $array[$i]['data_fim'] = $this->function->data_banco_br($this->data_f);
+
+            }
+
+            $result['result'] = $array;
+        }
+        return $result;
+    }
 
     private function buscarWhereData($tabela)
     {

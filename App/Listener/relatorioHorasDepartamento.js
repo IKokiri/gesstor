@@ -6,8 +6,68 @@ interact_fields['id'] = '';
 interact_fields['menu'] = '';
 interact_fields['status'] = '';
 
+function loadContratos() {
+    var formData = new FormData();
+
+    formData = load_fields(formData, interact_fields);
+
+    formData.append('action', "Contrato");
+
+    formData.append('method', "getAll");
+
+    $.ajax({
+        url: urlApp,
+        type: 'POST',
+        dataType: 'JSON',
+        data: formData,
+        success: function (data) {
+
+            option = '<option value="">Selecione</option>';
+
+            if (data.count) {
+
+                $.each(data.result, function (key, value) {
+
+
+                    option += '<option value="' + value.id + '" >' + value.contrato + '</option>';
+                });
+
+                $("#id_contrato").html(option);
+
+            } else if (data.MSN) {
+                mensagem('Erro', data.msnErro, '', '');
+            }
+        },
+
+        processData: false,
+        cache: false,
+        contentType: false
+    }).done(function () {
+        $(".select2_single").select2({
+            placeholder: "Selecione",
+            allowClear: true
+        });
+    });
+
+}
+
 function grid() {
+    
     $('#table_principal').DataTable().destroy();
+    /**
+     * caso o usuário selecione um contrato
+     */
+    id_contrato = ''
+    method= 'getAll';
+    
+    if($("#id_tipo").val() == 1){
+
+        id_contrato= $("#id_contrato").val()
+        method = 'getAllContratos'
+    }
+    
+    
+
 
     $.ajax({
         url: urlApp,
@@ -16,9 +76,11 @@ function grid() {
         data: {
 
             action: 'RelatorioHorasDepartamento',
-            method: 'getAll',
+            method: method,
             data_inicio: $("#data_inicio").val(),
-            data_fim: $("#data_fim").val()
+            data_fim: $("#data_fim").val(),
+            id_contrato: id_contrato
+            
 
         }, success: function (data) {
 
@@ -109,6 +171,16 @@ $(document).ready(function () {
 
     grid();
 
+})
+
+$(document).on("change","#id_tipo",function(){
+        
+    tipo = $(this).val()
+
+    if(tipo == 1){
+        loadContratos();
+    }
+    
 })
 
 $(document).on("keyup", '#data_inicio', function (e) {
