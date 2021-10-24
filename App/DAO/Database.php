@@ -109,11 +109,12 @@ class Database extends InfoDB
             $arrayRetorno['MSN'] = "";
 
         } catch (\PDOException $Exception) {
-            // print_r($Exception->getTrace());
+            // print_r($Exception);
+
             $arrayErro = verificarErro($Exception->getCode());
             $arrayRetorno['status'] = false;
             $arrayRetorno['result'] = "";
-            $arrayRetorno['msnErro'] = $arrayErro['msnErro'];
+            $arrayRetorno['msnErro'] = $Exception;
             $arrayRetorno['MSN'] = $arrayErro['erro'];
             $arrayRetorno['cliente'] = $arrayErro['cliente'];
             Database::sendMailerror($Exception);

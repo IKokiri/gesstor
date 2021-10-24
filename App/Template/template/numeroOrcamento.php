@@ -11,7 +11,11 @@
                 <input type="button" id='teste' class="btn btn-success add pull-right" value="+">
                 <input type="button" class="btn btn-info help pull-right" value="?">
                 <div class="clearfix"></div>
-                <div id="gender" class="btn-group" data-toggle="buttons">
+                <select id="tipo_filtro">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                </select>
+                <!-- <div id="gender" class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default" data-toggle-class="btn-primary"
                            data-toggle-passive-class="btn-default">
                         <input type="radio" class='pessoa_tipo filtro' id='tipo_filtro'
@@ -26,7 +30,7 @@
                                value="4"
                                data-parsley-multiple="tipo_pessoa"> 4 Digitos
                     </label>
-                </div>
+                </div> -->
 
                 <div class="col-md-2">
                     <select class="select2_single form-control" id="data_filtro">

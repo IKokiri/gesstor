@@ -305,7 +305,7 @@ function grid() {
 
             action: 'NumeroOrcamento',
             method: 'getAllGrid',
-            tipo_filtro: $("[name='tipo_filtro']:checked").val(),
+            tipo_filtro: $("#tipo_filtro").val(),
             data_filtro: $("#data_filtro").val()
 
         }, success: function (data) {

@@ -32,7 +32,7 @@ class Funcionario extends Controller
 
         $array['email'] = $object['email'];
         $array['senha'] = $object['senha'];
-        $array['id_grupo_permissao'] = '';
+        $array['id_grupo_permissao'] = 0;
         $array['status'] = 'A';
 
         $oUsuario->populate($array);

@@ -39,6 +39,7 @@ function loadFuncionarios() {
             if (data.count) {
 
                 $.each(data.result, function (key, value) {
+                    
                     option += '<option value="' + value.id + '" >' + value.nome + ' ' + value.sobrenome + '</option>';
                 });
 

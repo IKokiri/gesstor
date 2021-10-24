@@ -21,6 +21,10 @@ interact_fields['sigla'] = '';
 interact_fields['uf'] = '';
 interact_fields['status'] = '';
 
+interact_fields['validadeCNH'] = '';
+interact_fields['cnh'] = '';
+interact_fields['categoriaCNH'] = '';
+
 interact_fields['email'] = '';
 interact_fields['senha'] = '';
 

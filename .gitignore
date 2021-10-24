@@ -1,2 +1,4 @@
 constants.php
 InfoDB.php
+App/vendor/
+data/

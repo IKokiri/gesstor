@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  # DEV Data - MariaDB
+  veiculos_mariadb:
+    container_name: ${CONTAINER_NAME:-veiculos-mariadb}
+    image: mariadb
+    restart: always
+    command: mysqld --max_allowed_packet=30M
+    environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-BuRox2005}
+        - MYSQL_DATABASE=${MYSQL_ROOT_DATABASE:-gesstor}
+    ports:
+        - "3306:3306"
+    volumes:
+        - ./data/db/:/var/lib/mysql

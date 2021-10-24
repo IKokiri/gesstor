@@ -27,12 +27,7 @@ class Funcionario extends Model
     {
         $this->validator->set('E-Mail', $this->email)->is_email();
         $this->validator->set('Senha', $this->senha)->is_required();
-        $this->validator->set('Cep', $this->cep)->is_required();
-        $this->validator->set('Rua', $this->rua)->is_required();
-        $this->validator->set('Numero', $this->numero)->is_required();
-        $this->validator->set('Bairro', $this->bairro)->is_required();
-        $this->validator->set('Cidade', $this->cidade)->is_required();
-        $this->validator->set('Uf', $this->uf)->is_required();
+       
 
         $validate = $this->validator->validate();
 
@@ -44,7 +39,7 @@ class Funcionario extends Model
             return $result;
         }
 
-        $sql = "INSERT INTO " . $this->table . " (tipo_pessoa,razao_social,nome,fantasia,sobrenome,rg,ie,cpf,cnpj,cep,rua,numero,bairro,cidade,uf,status,id_usuario_responsavel,sigla) VALUES (:tipo_pessoa,:razao_social,:nome,:fantasia,:sobrenome,:rg,:ie,:cpf,:cnpj,:cep,:rua,:numero,:bairro,:cidade,:uf,:status,:id_usuario_responsavel,:sigla)";
+        $sql = "INSERT INTO " . $this->table . " (tipo_pessoa,razao_social,nome,fantasia,sobrenome,rg,ie,cpf,cnpj,cep,rua,numero,bairro,cidade,uf,status,id_usuario_responsavel,sigla,cnh,validadeCNH,categoriaCNH) VALUES (:tipo_pessoa,:razao_social,:nome,:fantasia,:sobrenome,:rg,:ie,:cpf,:cnpj,:cep,:rua,:numero,:bairro,:cidade,:uf,:status,:id_usuario_responsavel,:sigla,:cnh,:validadeCNH,:categoriaCNH)";
 
         $query = $this->dbh->prepare($sql);
 
@@ -67,6 +62,9 @@ class Funcionario extends Model
         $query->bindValue(':uf', $this->uf, PDO::PARAM_STR);
         $query->bindValue(':status', $this->status, PDO::PARAM_STR);
         $query->bindValue(':id_usuario_responsavel', $this->id_usuario_responsavel, PDO::PARAM_STR);
+        $query->bindValue(':cnh', $this->cnh, PDO::PARAM_STR);
+        $query->bindValue(':validadeCNH', $this->function->data_br_banco($this->validadeCNH), PDO::PARAM_STR);
+        $query->bindValue(':categoriaCNH', $this->categoriaCNH, PDO::PARAM_STR);
 
         $result = Database::executa($query);
 
@@ -79,12 +77,7 @@ class Funcionario extends Model
         $this->validator->set('Identificador', $this->id)->is_required();
         $this->validator->set('E-Mail', $this->email)->is_email();
         $this->validator->set('Senha', $this->senha)->is_required();
-        $this->validator->set('Cep', $this->cep)->is_required();
-        $this->validator->set('Rua', $this->rua)->is_required();
-        $this->validator->set('Numero', $this->numero)->is_required();
-        $this->validator->set('Bairro', $this->bairro)->is_required();
-        $this->validator->set('Cidade', $this->cidade)->is_required();
-        $this->validator->set('Uf', $this->uf)->is_required();
+       
         $validate = $this->validator->validate();
         $erros = $this->validator->get_errors();
 
@@ -113,6 +106,9 @@ class Funcionario extends Model
                 numero = :numero,
                 bairro = :bairro,
                 cidade = :cidade,
+                cnh = :cnh,
+                validadeCNH = :validadeCNH,
+                categoriaCNH = :categoriaCNH,
                 uf = :uf 
                 WHERE id = :id";
 
@@ -135,6 +131,9 @@ class Funcionario extends Model
         $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
         $query->bindValue(':bairro', $this->bairro, PDO::PARAM_STR);
         $query->bindValue(':cidade', $this->cidade, PDO::PARAM_STR);
+        $query->bindValue(':cnh', $this->cnh, PDO::PARAM_STR);
+        $query->bindValue(':validadeCNH', $this->function->data_br_banco($this->validadeCNH), PDO::PARAM_STR);
+        $query->bindValue(':categoriaCNH', $this->categoriaCNH, PDO::PARAM_STR);
         $query->bindValue(':uf', $this->uf, PDO::PARAM_STR);
 
         $result = Database::executa($query);
@@ -226,6 +225,9 @@ class Funcionario extends Model
                 $array['uf'] = $linha['uf'];
                 $array['email'] = $linha['email'];
                 $array['senha'] = $linha['senha'];
+                $array['cnh'] = $linha['cnh'];
+                $array['validadeCNH'] = $this->function->data_banco_br($linha['validadeCNH']);
+                $array['categoriaCNH'] = $linha['categoriaCNH'];
 
             }
 

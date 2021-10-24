@@ -337,13 +337,29 @@ function loadFuncionarios() {
         success: function (data) {
 
             option = '';
+            var arrId = []
+                   
 
             if (data.count) {
 
-                $.each(data.result, function (key, value) {
-                    option += '<option value="' + value.id + '" >' + value.nome + ' ' + value.sobrenome + '</option>';
-                });
+                
 
+                $.each(data.result, function (key, value) {
+
+                    // console.log(arrId.indexOf(value.id))
+                    if(arrId.indexOf(value.id) < 0){
+                        arrId.push(value.id)  
+
+                        // console.log("aaaa")                      
+                        option += '<option value="' + value.id + '" >' + value.nome + ' ' + value.sobrenome + '</option>';
+
+                    }else{
+                        // console.log("bbbb")
+
+                    }
+
+                });
+                // console.log(arrId)
                 $("#id_funcionario").html(option);
 
             } else if (data.MSN) {
@@ -535,7 +551,7 @@ function grid() {
     }).done(function () {
         $('#table_principal').DataTable();
         $(".mask_float_hora").inputmask("([9][9].5|0)|(aaa)");
-        console.log(diasSexta);
+        // console.log(diasSexta);
         var countries = {
             GR1: "GR1",
             GR2: "GR2",
