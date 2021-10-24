@@ -18,6 +18,9 @@ if ($result = $mysqli->query($query)) {
     /* fetch associative array */
     while ($row = $result->fetch_assoc()) {
         $arrayFunc[$row["id"]]["nome"] = utf8_encode($row["nome"]." ".$row["sobrenome"]);
+        $arrayFunc[$row["id"]]["cnh"] = utf8_encode($row["cnh"]);
+        $arrayFunc[$row["id"]]["validadeCNH"] = utf8_encode($row["validadeCNH"]);
+        $arrayFunc[$row["id"]]["categoriaCNH"] = utf8_encode($row["categoriaCNH"]);
         $arrayFunc[$row["id"]]["id"] = $row["id"];
     }
 
