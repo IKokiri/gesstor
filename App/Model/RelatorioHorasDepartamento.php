@@ -22,6 +22,34 @@ class RelatorioHorasDepartamento extends Model
         $this->validator = new Data_Validator();
     }
 
+    public function getHorasFuncContrato(){
+        $sql = "select * from gesstor.horas 
+        where id_tabela = 1 and id_tabela_complemento = :id_contrato and id_funcionario = :id_funcionario and data >= :data_inicio and data <= :data_fim";
+        
+        $query = $this->dbh->prepare($sql);
+
+        $query->bindValue(':id_contrato', $this->id_contrato, PDO::PARAM_STR);
+        $query->bindValue(':id_funcionario', $this->id_funcionario, PDO::PARAM_STR);
+        $query->bindValue(':data_inicio', $this->function->data_br_banco($this->data_inicio), PDO::PARAM_STR);
+        $query->bindValue(':data_fim', $this->function->data_br_banco($this->data_fim), PDO::PARAM_STR);
+        
+        
+        $result = Database::executa($query);
+     
+        if ($result['status'] && $result['count']) {
+            for ($i = 0; $linha = $query->fetch(PDO::FETCH_ASSOC); $i++) {
+
+                $array[$i]['data'] = $this->function->data_banco_br($linha['data']);
+                $array[$i]['tempo'] = $linha['tempo'];
+
+            }
+
+            $result['result'] = $array;
+        }
+        return $result;
+
+    }
+    
     public function getAllHoras()
     {
             $and = '';

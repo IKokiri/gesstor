@@ -812,6 +812,16 @@ class RelatorioHorasDepartamento extends Controller
 
     }
 
+    function acumuloHorasFuncionarioContrato($object){
+        
+        $this->oModel->populate($object);
+
+        $result = $this->oModel->getHorasFuncContrato();
+
+        echo json_encode($result);
+
+    }
+
     /**
      * ORGANIZA CONTRATOS PROPOSTAS E CENTRO CUSTOS POR ORDEM ALFABETICA / NUMERICA
      */
